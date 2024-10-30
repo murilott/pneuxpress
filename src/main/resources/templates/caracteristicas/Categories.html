@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Style3.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <script src="categories.js" defer></script>
+    <title>Ponto de Venda - PDV</title>
+  </head>
+  <body>
+    <div class="font">
+      <div id="cabecalho">
+        <h1>Suite Store</h1>
+        <ul>
+          <li><a href="main.html">Home</a><br /></li>
+          <li><a href="Products.html">Products</a><br /></li>
+          <li><a href="Categories.html">Categories</a><br /></li>
+          <li><a href="History.html">History</a><br /></li>
+        </ul>
+        <br />
+      </div>
+
+      <div class="tudo">
+        <div class="flex-container1">
+          <h2><strong>Categories: </strong></h2>
+          <form id="myform" method="post">
+            <input
+              type="text"
+              id="CatName"
+              name="CatName"
+              placeholder="Category name: "
+            /><br />
+            <input
+              type="text"
+              id="tax"
+              name="tax"
+              placeholder="Tax:"
+            /><br />
+            <input type="submit" value="Adicionar" id="btnSalvar">
+            <!-- <button id="btnSalvar">Adicionar</button> -->
+          </form>
+        </div>
+      
+        <div class="flex-container2" id="result">
+          
+          <table id="tabelaCategoria">
+            <h3>Categories Table:</h3>
+            <thead>
+                <tr>
+                    <th id="codd"><strong>Code</strong></th>
+                    <th id="catt"><strong>Category</strong></th>
+                    <th id="taxx"><strong>Tax</strong></th>
+                    <th id="delete"></th>
+                </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+
+          </table>
+        </div>
+      </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+

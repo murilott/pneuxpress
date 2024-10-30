@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="Style2.css" />
+    <link rel="stylesheet" href="reset.css" />
+    <script src="products.js" defer></script>
+    <title>Ponto de venda - PDV</title>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div id="cabecalho">
+        <h1>Suite Store</h1>
+        <ul>
+          <li><a href="main.html">Home</a><br /></li>
+          <li><a href="Products.html">Products</a><br /></li>
+          <li><a href="Categories.html">Categories</a><br /></li>
+          <li><a href="History.html">History</a><br /></li>
+        </ul>
+        <br />
+      </div>
+      <div class="tudo">
+        <div>
+          <div class="corpo">
+            <div class="prod">
+              <h2><strong>Product: </strong></h2>
+              <form id="myform">
+                <input
+                  type="text"
+                  id="prodname"
+                  class="required"
+                  name="prodname"
+                  placeholder="Product name: "
+                />
+                <div id="ladolado">
+                  <input
+                    type="text"
+                    id="amount"
+                    class="required"
+                    name="amount"
+                    placeholder="Amount: "
+                  />
+                  <input
+                    type="text"
+                    id="unitprice"
+                    name="unitprice"
+                    class="required"
+                    placeholder="Unit price: "
+                  />
+                </div>
+                <label for="categoria" id="categoria2"
+                  >Categoria do Produto:
+                </label>
+                <select name="categoria" id="categoria" class="required">
+                  <option></option>
+                </select>
+                <br />
+
+                <button id="subb">Add to product table</button>
+              </form>
+            </div>
+            <div class="linha"></div>
+
+            <div class="tabela">
+              <h3>Product Table:</h3>
+              <table id="tabelaProduto">
+                <tr>
+                  <th id="grande"><strong>Code</strong></th>
+                  <th id="prodd"><strong>Product</strong></th>
+                  <th id="amoo"><strong>Amount</strong></th>
+                  <th id="unii"><strong>Unit price</strong></th>
+                  <th id="catt"><strong>Category</strong></th>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
