@@ -15,6 +15,8 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @OneToMany
+    @JoinColumn(name = "pedido_id")
     private List<ItemPedido> itens;
     private float custoTotal;
 }

@@ -15,6 +15,8 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    @OneToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
     private int quantidade;
     private float imposto;
