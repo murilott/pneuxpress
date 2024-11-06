@@ -24,13 +24,10 @@ public class UsuarioService {
     }
 
     public List<Usuario> obterTodos(){
-        return repository.findAll(Sort.by("nome"));
+        return repository.findAll(Sort.by("nomeCompleto"));
     }
 
     public void salvar(Usuario usuario) {
-        if(Strings.isBlank(usuario.getNome())){
-            throw new RuntimeException("Nome não informado.");
-        }
         repository.save(usuario);
     }
 
