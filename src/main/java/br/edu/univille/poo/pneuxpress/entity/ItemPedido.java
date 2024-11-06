@@ -21,4 +21,9 @@ public class ItemPedido {
     private int quantidade;
     private float imposto;
     private float custo;
+
+    public double calculaCusto() {
+        custo = (getProduto().getPreco() * quantidade) + imposto;
+        return custo;
+    }
 }
