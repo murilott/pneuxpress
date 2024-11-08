@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/css/cadastro.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="header">
+        <h2><strong>PneuXpress</strong></h2>
+        <ul id="options">
+            <li>Options</li>
+            <li>Lista de pedidos</li>
+            <li>Cadastrar produtos</li>
+        </ul>
+        <ul id="login">
+            <li>Editar Usuário</li>
+            <li>Sign up</li>
+            <li>Sign In</li>
+        </ul>
+    </div>
+    <div id="corpo">
+        <div id="outer">
+            <h2>Cadastrar Produtos</h2>
+
+            <button>Voltar</button>
+        </div>
+        <div id="inner">
+            <form id="cadastraPneu">
+                <label for="marca">Marca</label>
+                <select name="marca" id="marca">
+                <option value=""></option>
+                </select>
+                <input type="text" name="dim" id="dim" placeholder="Dimensões: ">
+                <input type="number" name="preco" id="preco" placeholder="Preço: ">
+                <input type="text" name="nome" id="nome" placeholder="Nome: ">
+                <button id="btnSalvar">Salvar</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
