@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="header">
+        <h2><strong>PneuXpress</strong></h2>
+        <ul id="options">
+            <a>Options</a>
+            <a>Lista de pedidos</a>
+            <a>Cadastrar produtos</a>
+        </ul>
+        <ul id="login">
+            <li>Editar Usuário</li>
+            <li>Sign up</li>
+            <li>Sign In</li>
+        </ul>
+    </div>
+    <div id="classe">
+        <div class="flex-container1">
+          <h2><strong>Home: </strong></h2>
+          <form id="myform">
+            <label for="Product"><strong>Product:</strong></label>
+            <select id="Product" name="Product">
+              <option></option>
+            </select>
+
+            <div id="gapp">
+              <input
+                type="text"
+                id="amount"
+                name="amount"
+                placeholder="Amount"
+              />
+
+              <input
+                type="text"
+                id="total"
+                name="total"
+                disabled
+                placeholder="Total:"
+              />
+              <div id="flex">
+                <input
+                  type="text"
+                  id="unitprice"
+                  name="unitprice"
+                  disabled
+                  placeholder="Unit Price"
+                />
+
+                <input
+                  type="text"
+                  id="tax"
+                  name="tax"
+                  placeholder="Tax"
+                  disabled
+                />
+                <input
+                  type="text"
+                  id="totalTax"
+                  name="totalTax"
+                  placeholder="Total Tax"
+                  disabled
+                />
+              </div>
+              
+            </div>
+            <br /><button id="btnSalvar">Adicionar</button>
+          </form>
+        </div>
+
+        <div id="Categories" class="flex-container2">
+          
+          <div class="tabela">
+            <h3><strong>Shopping Cart:</strong></h3>
+
+            <table id="tabela2">
+              <tr>
+                <th id="id proda"><strong>Code</strong></th>
+                <th id="prod1"><strong>Product</strong></th>
+                <th id="UnitPrice"><strong>Unit price</strong></th>
+                <th id="Amount"><strong>Amount</strong></th>
+                <th id="Total"><strong>Total</strong></th>
+                <th></th>
+              </tr>
+            </table>
+          </div>
+          <div class="flex-container3">
+            <div class="paga">
+              <form id="pagamento">
+                <label for="taxed"><strong>Tax:</strong></label>
+                <input type="text" id="taxed" name="taxed" disabled/><br />
+                <label for="totaled"><strong>Total:</strong></label>
+                <input type="text" id="totaled" name="totaled" disabled/>
+              </form>
+            </div>
+
+            <div class="botao">
+              <button type="button" id="cancel">Cancel</button>
+              <button type="button" id="finish">Finish</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+</html>
