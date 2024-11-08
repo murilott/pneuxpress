@@ -20,6 +20,8 @@ public class Usuario {
     private Date dataNascimento;
     private String senha;
     private boolean admin;
+    @OneToMany
+    @JoinColumn(name = "usuario_id")
     private List<Pedido> pedidos;
 
 }

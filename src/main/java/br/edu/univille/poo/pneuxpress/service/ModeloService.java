@@ -28,9 +28,6 @@ public class ModeloService {
     }
 
     public void salvar(Modelo modelo) {
-        if(Strings.isBlank(modelo.getNome())){
-            throw new RuntimeException("Nome não informado.");
-        }
         repository.save(modelo);
     }
 

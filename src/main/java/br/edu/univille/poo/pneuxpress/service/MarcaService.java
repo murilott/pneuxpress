@@ -28,9 +28,6 @@ public class MarcaService {
     }
 
     public void salvar(Marca marca) {
-        if(Strings.isBlank(marca.getNome())){
-            throw new RuntimeException("Nome não informado.");
-        }
         repository.save(marca);
     }
 

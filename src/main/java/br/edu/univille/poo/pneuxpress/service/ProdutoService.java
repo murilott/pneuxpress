@@ -24,13 +24,10 @@ public class ProdutoService {
     }
 
     public List<Produto> obterTodos(){
-        return repository.findAll(Sort.by("nome"));
+        return repository.findAll(Sort.by("marca"));
     }
 
     public void salvar(Produto produto) {
-        if(Strings.isBlank(produto.getNome())){
-            throw new RuntimeException("Nome não informado.");
-        }
         repository.save(produto);
     }
 

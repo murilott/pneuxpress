@@ -24,13 +24,10 @@ public class CaracteristicasService {
     }
 
     public List<Caracteristicas> obterTodos(){
-        return repository.findAll(Sort.by("nome"));
+        return repository.findAll(Sort.by("categoria"));
     }
 
     public void salvar(Caracteristicas caracteristicas) {
-        if(Strings.isBlank(caracteristicas.getNome())){
-            throw new RuntimeException("Nome não informado.");
-        }
         repository.save(caracteristicas);
     }
 
