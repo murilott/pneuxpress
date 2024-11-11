@@ -20,10 +20,11 @@
     </tr>
     <tr th:each="e : ${lista}">
         <td th:text="${e.id}">ID</td>
-        <td  th:text="${e.nome}">Nome</td>
+        <td  th:text="${e.nomeDisplay}">Nome</td>
+        <td  th:text="${e.marca.nome}">Marca</td>
         <td  th:text="${e.caracteristicas}">Caracteristicas</td>
         <td  th:text="${e.preco}">Preço</td>
-        <td  th:text="${e.quantidade}">Quantidade</td>
+        <td  th:text="${e.quantidadeEstoque}">Quantidade</td>
         <td><img th:src="${e.imagem}"></td>
         <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td>
     </tr>

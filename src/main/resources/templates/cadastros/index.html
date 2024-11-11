@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link rel="stylesheet" href="../../static/css/cadastro.css"> -->
     <link rel="stylesheet" href="/css/cadastro.css">
-    <title>Novo Marca</title>
+    <title>Novo Produto</title>
 </head>
 <body>
     <div id="header">
@@ -15,7 +15,7 @@
         <ul id="options">
           <li><a th:href="@{/estoque}">Estoque</a></li>
           <!-- <li><a href="home.html">Home</a></li> -->
-          <li><a th:href="@{/cadastros}">Cadastros</a></li>
+          <li><a href="cadastrarPneu.html">Cadastros</a></li>
           <li><a th:href="@{/produto}">Produtos</a></li>    
         </ul>
 
@@ -27,19 +27,15 @@
     </div>
 
     <div id="corpo">
-        <div id="outer">
-            <h2>Cadastrar Marca</h2>
-            <p><a th:href="@{/marca}">Marca</a> / Novo</p>
-            <button>Voltar</button>
-        </div>
-
         <div id="inner">
-            <form id="cadastraPneu" th:action="@{/marca/salvar}" th:object="${elemento}" method="post">
-                <input type="text" name="nome" id="nome" placeholder="Nome: " th:field="*{nome}">
-                <button id="btnSalvar" type="submit">Salvar</button>
-            </form>
+            <P>Selecione um item para ir a tela de cadastro:</p>
 
-            <p th:if="${erro != null}" th:text="${erro}"></p>
+            <ul id="cads">
+                <li><a th:href="@{/marca}">Marca</a></li>
+                <li><a th:href="@{/caracteristicas}">Caracteristicas</a></li>
+                <li><a th:href="@{/produto}">Produtos</a></li>    
+                <li><a th:href="@{/usuario}">Usuário</a></li>    
+            </ul>
         </div>
     </div>
 </body>

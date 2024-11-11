@@ -20,4 +20,7 @@ public class Caracteristicas {
     private List<String> perfil;
     private List<String> aro;
 
+    // public String nome() {
+    //     return "";
+    // }
 }

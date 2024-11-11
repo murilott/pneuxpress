@@ -44,11 +44,13 @@ public class ProdutoController {
     @RequestMapping("/salvar")
     public ModelAndView salvarNovo(@ModelAttribute("elemento") Produto produto){
         try{
+            // produto.getCaracteristicas()
             service.salvar(produto);
             return new ModelAndView("redirect:/produto");
         }catch (Exception e){
             var mv = new ModelAndView("produto/novo");
             mv.addObject("elemento", produto);
+            mv.addObject("listaMarca", marcaService.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;
         }
@@ -62,6 +64,7 @@ public class ProdutoController {
         
         if(opt.isPresent()) {
             mv.addObject("elemento", opt.get());
+            mv.addObject("listaMarca", marcaService.obterTodos());
             return mv;
         }
 
