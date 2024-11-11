@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.poo.pneuxpress.entity.Produto;
+import br.edu.univille.poo.pneuxpress.service.MarcaService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 
 @Controller
@@ -19,10 +20,14 @@ public class ProdutoController {
     @Autowired
     private ProdutoService service;
 
+    @Autowired
+    private MarcaService marcaService;
+
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("produto/index");
         mv.addObject("lista", service.obterTodos());
+        mv.addObject("listaMarca", marcaService.obterTodos());
         return mv;
     }
 
@@ -31,6 +36,7 @@ public class ProdutoController {
     public ModelAndView novo(){
         var mv = new ModelAndView("produto/novo");
         mv.addObject("elemento", new Produto());
+        mv.addObject("listaMarca", marcaService.obterTodos());
         return mv;
     }
 

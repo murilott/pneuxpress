@@ -1,23 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Estoque</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="">
+    <title>Document</title>
 </head>
 <body>
-<h1>Estoque</h1>
-<p><a th:href="@{/produto/novo}">Cadastrar Produto</a></p>
-<br>
-<table th:if="${lista.size()} > 0">
-    <tr>
-        <td>ID</td><td>Nome</td>
-    </tr>
-    <tr th:each="e : ${lista}">
-        <td th:text="${e.id}">ID</td>
-        <td  th:text="${e.nome}">Nome</td>
-    </tr>
-</table>
-<p th:unless="${lista.size()} > 0">Não há marcas cadastradas.</p>
-<br>
+    <div id="header">
+        <h2><strong>PneuXpress</strong></h2>
+        <ul id="options">
+          <li><a href="estoque.html">Estoque</a></li>
+          <li><a href="home.html">Home</a></li>
+          <li><a href="cadastrarPneu.html">Cadastrar</a></li>
+          <li><a href="products.html">Produtos</a></li>
+            
+            
+            
+        </ul>
+        <ul id="login">
+            <li>Editar Usuário</li>
+            <li>Sign up</li>
+            <li>Sign In</li>
+        </ul>
+    </div>
+    <div id="corpo">
+        <div id="outer">
+            <h2>Cadastrar Produtos</h2>
+
+            <p><a th:href="@{/cadastrarPneu}">Estoque</a></p>
+            <button>Voltar</button>
+        </div>
+    <div id="corpo">
+        <div id="outer">
+
+        </div>
+        <div id="inner">
+            <table>
+                <thead >
+                    <tr>
+                        <td>Id</td>
+                        <td>Marca</td>
+                        <td>Dimensões</td>
+                        <td>Nome</td>
+                        <td>Estoque</td>
+                        <td>Preço</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
