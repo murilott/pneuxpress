@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.poo.pneuxpress.entity.Produto;
+import br.edu.univille.poo.pneuxpress.service.CaracteristicasService;
 import br.edu.univille.poo.pneuxpress.service.MarcaService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 
@@ -23,11 +24,15 @@ public class ProdutoController {
     @Autowired
     private MarcaService marcaService;
 
+    @Autowired
+    private CaracteristicasService caracteristicasService;
+
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("produto/index");
         mv.addObject("lista", service.obterTodos());
         mv.addObject("listaMarca", marcaService.obterTodos());
+        mv.addObject("listaCaracteristicas", caracteristicasService.obterTodos());
         return mv;
     }
 
@@ -37,6 +42,7 @@ public class ProdutoController {
         var mv = new ModelAndView("produto/novo");
         mv.addObject("elemento", new Produto());
         mv.addObject("listaMarca", marcaService.obterTodos());
+        mv.addObject("listaCaracteristicas", caracteristicasService.obterTodos());
         return mv;
     }
 
@@ -51,6 +57,7 @@ public class ProdutoController {
             var mv = new ModelAndView("produto/novo");
             mv.addObject("elemento", produto);
             mv.addObject("listaMarca", marcaService.obterTodos());
+            mv.addObject("listaCaracteristicas", caracteristicasService.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;
         }
@@ -65,6 +72,7 @@ public class ProdutoController {
         if(opt.isPresent()) {
             mv.addObject("elemento", opt.get());
             mv.addObject("listaMarca", marcaService.obterTodos());
+            mv.addObject("listaCaracteristicas", caracteristicasService.obterTodos());
             return mv;
         }
 

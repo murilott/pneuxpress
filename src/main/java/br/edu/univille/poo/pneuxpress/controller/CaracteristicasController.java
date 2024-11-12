@@ -31,6 +31,7 @@ public class CaracteristicasController {
     public ModelAndView novo(){
         var mv = new ModelAndView("caracteristicas/novo");
         mv.addObject("elemento", new Caracteristicas());
+        mv.addObject("lista", service.obterTodos());
         return mv;
     }
 
@@ -43,6 +44,7 @@ public class CaracteristicasController {
         }catch (Exception e){
             var mv = new ModelAndView("caracteristicas/novo");
             mv.addObject("elemento", caracteristicas);
+            mv.addObject("lista", service.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;
         }
@@ -56,6 +58,7 @@ public class CaracteristicasController {
         
         if(opt.isPresent()) {
             mv.addObject("elemento", opt.get());
+            mv.addObject("lista", service.obterTodos());
             return mv;
         }
 
