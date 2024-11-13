@@ -27,14 +27,14 @@
     </div>
 
     <div id="corpo">
-        <div id="outer">
-            <h2>Cadastrar Marca</h2>
-            <p><a th:href="@{/marca}">Marca</a> / Novo</p>
-            <button>Voltar</button>
-        </div>
-
+        
         <div id="inner">
+            <div id="outer">
+                <p><a th:href="@{/marca}">Marca</a> / Novo</p>
+                <button>Voltar</button>
+            </div>
             <form id="cadastraPneu" th:action="@{/marca/salvar}" th:object="${elemento}" method="post">
+                <h2>Cadastrar Marca</h2>
                 <input type="text" name="nome" id="nome" placeholder="Nome: " th:field="*{nome}">
                 <button id="btnSalvar" type="submit">Salvar</button>
             </form>

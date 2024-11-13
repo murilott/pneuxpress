@@ -27,13 +27,13 @@
     </div>
 
     <div id="corpo">
-        <div id="outer">
-            <h2>Cadastrar Produto</h2>
-            <p><a th:href="@{/produto}">Produtos</a> / Novo</p>
-            <button>Voltar</button>
-        </div>
-
+        
         <div id="inner">
+            <div id="outer">
+                <h2>Cadastrar Produto</h2>
+                <p><a th:href="@{/produto}">Produtos</a> / Novo</p>
+                <button>Voltar</button>
+            </div>
             <form id="cadastraPneu" th:action="@{/produto/salvar}" th:object="${elemento}" method="post">
                 <label for="marca">Marca</label>
                 <select name="marca" id="marca" th:field="*{marca}">
@@ -42,6 +42,7 @@
                         th:text="${marca.nome}">
                     </option>
                 </select>
+                <label for="caracteristicas">Dimensões</label>
                 <select name="caracteristicas" id="caracteristicas" th:field="*{caracteristicas}">
                     <option th:each="caracteristicas : ${listaCaracteristicas}"
                         th:value="${caracteristicas.id}"
