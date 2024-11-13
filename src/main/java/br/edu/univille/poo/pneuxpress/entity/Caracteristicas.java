@@ -15,9 +15,12 @@ public class Caracteristicas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private List<String> categoria;
-    private List<String> largura;
-    private List<String> perfil;
-    private List<String> aro;
+    private String categoria;
+    private String largura;
+    private String perfil;
+    private String aro;
 
+    public String nome() {
+        return categoria + " " + largura + " " + perfil + " " + aro;
+    }
 }

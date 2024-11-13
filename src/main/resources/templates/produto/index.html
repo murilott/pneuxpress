@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos</title>
+</head>
+<body>
+<h1>Produtos</h1>
+<p><a th:href="@{/produto/novo}">Novo</a></p>
+<br>
+<table th:if="${lista.size()} > 0">
+    <tr>
+        <td>ID</td>
+        <td>Nome</td>
+        <td>Marca</td>
+        <td>Caracteristicas</td>
+        <td>Preço</td>
+        <td>Quantidade</td>
+        <td>Imagem</td>
+    </tr>
+    <tr th:each="e : ${lista}">
+        <td th:text="${e.id}">ID</td>
+        <td  th:text="${e.nomeDisplay}">Nome</td>
+        <td  th:text="${e.marca.nome}">Marca</td>
+        <td  th:text="${e.caracteristicas}">Caracteristicas</td>
+        <td  th:text="${e.preco}">Preço</td>
+        <td  th:text="${e.quantidadeEstoque}">Quantidade</td>
+        <td><img th:src="${e.imagem}"></td>
+        <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td>
+    </tr>
+</table>
+<p th:unless="${lista.size()} > 0">Não há produtos cadastrados.</p>
+<br>
+</body>
+</html>

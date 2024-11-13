@@ -19,4 +19,12 @@ public class Pedido {
     @JoinColumn(name = "pedido_id")
     private List<ItemPedido> itens;
     private float custoTotal;
+
+    public float calculaCustoTotal() {
+        for (int i=0; i<itens.size(); i++) {
+            custoTotal += itens.get(i).getCusto();
+        }
+        
+        return custoTotal;
+    }
 }

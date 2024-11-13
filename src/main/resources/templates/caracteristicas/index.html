@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Caracteristicas</title>
+</head>
+<body>
+<h1>Caracteristicas</h1>
+<p><a th:href="@{/caracteristicas/novo}">Novo</a></p>
+<br>
+<table th:if="${lista.size()} > 0">
+    <tr>
+        <td>ID</td>
+        <td>Categoria</td>
+        <td>Largura</td>
+        <td>Perfil</td>
+        <td>Aro</td>
+    </tr>
+    <tr th:each="e : ${lista}">
+        <td th:text="${e.id}">ID</td>
+        <td  th:text="${e.categoria}">Categoria</td>
+        <td  th:text="${e.largura}">Largura</td>
+        <td  th:text="${e.perfil}">Perfil</td>
+        <td  th:text="${e.aro}">Aro</td>
+        <td><a th:href="@{/caracteristicas/{id}(id=${e.id})}">Editar</a></td>
+    </tr>
+</table>
+<p th:unless="${lista.size()} > 0">Não há caracteristicas cadastradas.</p>
+<br>
+</body>
+</html>
