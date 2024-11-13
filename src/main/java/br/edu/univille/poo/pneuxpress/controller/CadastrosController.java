@@ -13,9 +13,8 @@ import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 import br.edu.univille.poo.pneuxpress.service.MarcaService;
 
 @Controller
-@RequestMapping("/estoque")
-public class EstoqueController {
-    
+@RequestMapping("/cadastros")
+public class CadastrosController {
     @Autowired
     private ProdutoService produtoService;
 
@@ -24,8 +23,8 @@ public class EstoqueController {
 
     @GetMapping
     public ModelAndView index(){
-        var mv = new ModelAndView("estoque/index");
-        mv.addObject("listaProduto", marcaService.obterTodos());
+        var mv = new ModelAndView("cadastros/index");
+        // mv.addObject("listaProduto", marcaService.obterTodos());
         return mv;
     }
 }

@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Marca</title>
+    <title>Estoque</title>
 </head>
 <body>
-<h1>Marca</h1>
-<p><a th:href="@{/marca/novo}">Novo</a></p>
-<p><a th:href="@{/estoque}">Estoque</a></p>
+<h1>Estoque</h1>
+<p><a th:href="@{/produto/novo}">Cadastrar Produto</a></p>
 <br>
 <table th:if="${lista.size()} > 0">
     <tr>
@@ -16,10 +15,9 @@
     <tr th:each="e : ${lista}">
         <td th:text="${e.id}">ID</td>
         <td  th:text="${e.nome}">Nome</td>
-        <td><a th:href="@{/marca/{id}(id=${e.id})}">Editar</a></td>
     </tr>
 </table>
-<p th:unless="${lista.size()} > 0">Não há marca cadastrados.</p>
+<p th:unless="${lista.size()} > 0">Não há marcas cadastradas.</p>
 <br>
 </body>
 </html>

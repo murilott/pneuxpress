@@ -22,9 +22,6 @@ public class Produto {
     @OneToOne
     @JoinColumn(name = "caracteristicas_id")
     private Caracteristicas caracteristicas;
-    @OneToOne
-    @JoinColumn(name = "modelo_id")
-    private Modelo modelo;
     private float preco;
     private int quantidadeEstoque;
     private String imagem;
