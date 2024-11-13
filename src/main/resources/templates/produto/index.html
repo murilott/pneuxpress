@@ -22,7 +22,7 @@
         <td th:text="${e.id}">ID</td>
         <td  th:text="${e.nomeDisplay}">Nome</td>
         <td  th:text="${e.marca.nome}">Marca</td>
-        <td  th:text="${e.caracteristicas}">Caracteristicas</td>
+        <td  th:text="${e.caracteristicas.nome()}">Caracteristicas</td>
         <td  th:text="${e.preco}">Preço</td>
         <td  th:text="${e.quantidadeEstoque}">Quantidade</td>
         <td><img th:src="${e.imagem}"></td>
