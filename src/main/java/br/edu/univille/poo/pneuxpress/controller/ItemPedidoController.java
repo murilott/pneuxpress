@@ -14,7 +14,7 @@ import br.edu.univille.poo.pneuxpress.service.ItemPedidoService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 
 @Controller
-@RequestMapping("/pedido")
+@RequestMapping("/itemPedido")
 public class ItemPedidoController {
     
     @Autowired

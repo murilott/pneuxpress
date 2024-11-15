@@ -25,9 +25,10 @@
     <div id="classe">
         <div class="form">
           <h2><strong>Home: </strong></h2>
-          <form id="myform">
+          <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${elemento}" method="post">
             <label for="Product"><strong>Produto:</strong></label>
-            <select id="Product" name="Product" th:field="*{elemento.produto}">
+
+            <select id="Product" name="Product" th:field="*{produto}">
                 <option th:each="produto : ${listaProduto}"
                         th:value="${produto.id}"
                         th:text="${produto.nomeDisplay}">
@@ -35,11 +36,11 @@
             </select>
 
             <div id="gapp">
-              <input type="text" id="amount" name="amount" placeholder="Amount"/>
+              <input type="text" id="amount" name="amount" placeholder="Amount" th:field="*{quantidade}"/>
               <input type="text" id="total" name="total" disabled placeholder="Total:"/>
 
               <div id="flex">
-                <input type="text" id="unitprice" name="unitprice" disabled placeholder="Unit Price"/>
+                <input type="text" id="unitprice" name="unitprice" disabled placeholder="Unit Price" th:field="*{produto.preco}"/> <!--  -->
                 <input type="text" id="tax" name="tax" placeholder="Tax" disabled/>
                 <input type="text" id="totalTax" name="totalTax" placeholder="Total Tax" disabled/>
               </div>

@@ -25,7 +25,7 @@
     <div id="classe">
         <div class="form">
           <h2><strong>Home: </strong></h2>
-          <form id="myform">
+          <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${elemento}" method="post">
             <label for="Product"><strong>Produto:</strong></label>
             <select id="Product" name="Product" th:field="*{elemento.produto}">
                 <option th:each="produto : ${listaProduto}"
