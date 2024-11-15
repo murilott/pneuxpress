@@ -46,7 +46,10 @@ public class ItemPedidoController {
     @RequestMapping("/salvar")
     public ModelAndView salvarNovo(@ModelAttribute("elemento") ItemPedido itemPedido){
         try{
-            service.salvar(itemPedido);
+            ItemPedido item = itemPedido;
+            item.setCusto(item.calculaCusto());
+
+            service.salvar(item);
             return new ModelAndView("redirect:/itemPedido");
         }catch (Exception e){
             var mv = new ModelAndView("itemPedido/novo");
@@ -61,7 +64,7 @@ public class ItemPedidoController {
     @GetMapping
     @RequestMapping("/{id}")
     public ModelAndView editar(@PathVariable long id){
-        var mv = new ModelAndView("itemPedido/editar");
+        var mv = new ModelAndView("itemPedido/index");
         var opt = service.obterPeloId(id);
         
         if(opt.isPresent()) {
