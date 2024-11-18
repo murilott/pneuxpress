@@ -13,7 +13,7 @@ import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 import br.edu.univille.poo.pneuxpress.service.MarcaService;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("")
 public class HomeController {
     
     @GetMapping

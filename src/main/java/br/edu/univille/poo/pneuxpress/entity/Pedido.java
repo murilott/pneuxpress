@@ -1,5 +1,6 @@
 package br.edu.univille.poo.pneuxpress.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class Pedido {
     private long id;
     @OneToMany
     @JoinColumn(name = "pedido_id")
-    private List<ItemPedido> itens;
+    private List<ItemPedido> itens = new ArrayList<ItemPedido>();
     private float custoTotal;
 
     public float calculaCustoTotal() {

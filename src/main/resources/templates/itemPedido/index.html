@@ -22,10 +22,12 @@
         <li>Sign In</li>
     </ul>
 </div>
-    <div id="classe">
+    <div id="inner">
         <div class="form">
           <h2><strong>Home: </strong></h2>
+
           <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${elemento}" method="post">
+          <!-- <form id="myform" th:action="@{/itemPedido/{path}}" th:object="${elemento}" method="post"> -->
             <label for="Product"><strong>Produto:</strong></label>
 
             <select id="Product" name="Product" th:field="*{produto}">
@@ -48,7 +50,7 @@
             </div>
 
             <br/>
-            <button id="btnSalvar">Adicionar</button>
+            <button type="submit" id="btnSalvar" name="incrementar">Adicionar</button>
           </form>
         </div>
 
@@ -56,8 +58,10 @@
           
           <div class="tabela">
             <h3><strong>Cart:</strong></h3>
+            <p th:text="'pedido: ' + ${pedido.id}"></p>
 
-            <table id="tabela2">
+            <!-- <table id="tabela2" th:if="${pedido.itens.size()} > 0"> -->
+            <table id="tabela2" > <!-- th:if="${pedido.itens}"-->
               <tr>
                 <th id="id proda"><strong>Code</strong></th>
                 <th id="prod1"><strong>Product</strong></th>
@@ -66,7 +70,18 @@
                 <th id="Total"><strong>Total</strong></th>
                 <th></th>
               </tr>
+              <tr th:each="e : ${pedido.itens}">
+                <td th:text="${e.id}">ID</td>
+                <td  th:text="${e.produto.nomeDisplay}">Nome</td>
+                <td  th:text="${e.produto.preco}">Marca</td>
+                <td  th:text="${e.quantidade}">Preço</td>
+                <td  th:text="${e.custo}">Caracteristicas</td>
+                <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
+              </tr>
             </table>
+
+            <p th:unless="${lista.size()} > 0">Não há item cadastrado.</p>
+            <p th:if="${pedido == null}" th:text="Não há pedido"></p>
           </div>
           <div class="flex-container3">
             <div class="paga">
@@ -78,9 +93,11 @@
               </form>
             </div>
 
+
             <div class="botao">
               <button type="button" id="cancel">Cancel</button>
               <button type="button" id="finish">Finish</button>
+              <p th:if="${erro != null}" th:text="${erro}"></p>
             </div>
           </div>
         </div>

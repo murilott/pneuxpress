@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.poo.pneuxpress.entity.ItemPedido;
+import br.edu.univille.poo.pneuxpress.entity.Pedido;
 import br.edu.univille.poo.pneuxpress.service.ItemPedidoService;
+import br.edu.univille.poo.pneuxpress.service.PedidoService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 
 @Controller
@@ -23,12 +25,17 @@ public class ItemPedidoController {
     @Autowired
     private ProdutoService produtoService;
 
+    @Autowired
+    private PedidoService pedidoService;
+
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("itemPedido/index");
         mv.addObject("elemento", new ItemPedido());
+        mv.addObject("pedido", new Pedido());
         mv.addObject("listaProduto", produtoService.obterTodos());
         mv.addObject("lista", service.obterTodos());
+        mv.addObject("listaPedido", pedidoService.obterTodos());
         return mv;
     }
 
@@ -42,12 +49,49 @@ public class ItemPedidoController {
         return mv;
     }
 
-    @PostMapping
+    // https://github.com/murilott/sisacademia/blob/main/src/main/java/br/univille/sisacademia/controller/RotinaController.java
+
+    @PostMapping(params = "incrementar")
     @RequestMapping("/salvar")
-    public ModelAndView salvarNovo(@ModelAttribute("elemento") ItemPedido itemPedido){
+    public ModelAndView incluirItemPedido(@ModelAttribute("elemento") ItemPedido item, Pedido pedido) {
+        try{
+            var mv = new ModelAndView("itemPedido/index");
+            // ItemPedido item = itemPedido;
+            item.setCusto(item.calculaCusto());
+            pedido.getItens().add(item);
+
+            pedidoService.salvar(pedido);
+            service.salvar(item);
+
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            mv.addObject("elemento", new ItemPedido());
+            mv.addObject("pedido", pedido);
+    
+            return mv;
+        } catch (Exception e){
+            var mv = new ModelAndView("itemPedido/index");
+            mv.addObject("elemento", item);
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            mv.addObject("pedido", pedido);
+            mv.addObject("erro", e.getMessage());
+            return mv;
+        }
+    }
+
+    @PostMapping
+    @RequestMapping("/finalizar")
+    public ModelAndView finalizar(@ModelAttribute("elemento") ItemPedido itemPedido){
         try{
             ItemPedido item = itemPedido;
             item.setCusto(item.calculaCusto());
+
+            // nss q perda de tempo - inútil
+            Pedido pedido = pedidoService.obterPedidoPeloItem(item);
+
+            pedido.getItens().add(item);
+            pedidoService.salvar(pedido);
 
             service.salvar(item);
             return new ModelAndView("redirect:/itemPedido");
