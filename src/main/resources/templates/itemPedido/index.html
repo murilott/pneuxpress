@@ -27,7 +27,7 @@
           <h2><strong>Home: </strong></h2>
 
           <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${elemento}" method="post">
-          <!-- <form id="myform" th:action="@{/itemPedido/{path}}" th:object="${elemento}" method="post"> -->
+          <!-- <form id="myform" th:action="@{/itemPedido/(incrementar)}" th:object="${elemento}" method="post"> -->
             <label for="Product"><strong>Produto:</strong></label>
 
             <select id="Product" name="Product" th:field="*{produto}">
@@ -71,7 +71,7 @@
                 <th></th>
               </tr>
               <tr th:each="e : ${pedido.itens}">
-                <td th:text="${e.id}">ID</td>
+                <td  th:text="${e.id}">ID</td>
                 <td  th:text="${e.produto.nomeDisplay}">Nome</td>
                 <td  th:text="${e.produto.preco}">Marca</td>
                 <td  th:text="${e.quantidade}">Preço</td>
