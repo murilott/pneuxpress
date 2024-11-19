@@ -34,8 +34,8 @@ public class ItemPedidoController {
         mv.addObject("elemento", new ItemPedido());
         mv.addObject("pedido", new Pedido());
         mv.addObject("listaProduto", produtoService.obterTodos());
-        mv.addObject("lista", service.obterTodos());
         mv.addObject("listaPedido", pedidoService.obterTodos());
+        mv.addObject("lista", service.obterTodos());
         return mv;
     }
 
@@ -51,13 +51,13 @@ public class ItemPedidoController {
 
     // https://github.com/murilott/sisacademia/blob/main/src/main/java/br/univille/sisacademia/controller/RotinaController.java
 
-    // @PostMapping(params = "incrementar")
     @RequestMapping("/salvar")
     public ModelAndView incluirItemPedido(@ModelAttribute("elemento") ItemPedido item, Pedido pedido) {
         try{
             var mv = new ModelAndView("itemPedido/index");
             // ItemPedido item = itemPedido;
             item.setCusto(item.calculaCusto());
+            // Pedido ped = pedido;
             pedido.getItens().add(item);
             // pedido.getItens().add(item);
 
@@ -65,6 +65,7 @@ public class ItemPedidoController {
             service.salvar(item);
 
             mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("listaPedido", pedidoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
             mv.addObject("elemento", new ItemPedido());
             mv.addObject("pedido", pedido);
@@ -73,6 +74,7 @@ public class ItemPedidoController {
             var mv = new ModelAndView("itemPedido/index");
             mv.addObject("elemento", item);
             mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("listaPedido", pedidoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
             mv.addObject("pedido", pedido);
             mv.addObject("erro", e.getMessage());

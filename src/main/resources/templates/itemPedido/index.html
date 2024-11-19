@@ -15,6 +15,7 @@
         <!-- <li><a href="home.html">Home</a></li> -->
         <li><a th:href="@{/cadastros}">Cadastros</a></li>
         <li><a th:href="@{/produto}">Produtos</a></li> 
+        <li><a th:href="@{/itemPedido}">itemPedido</a></li> 
     </ul>
     <ul id="login">
         <li>Editar Usuário</li>
@@ -27,7 +28,6 @@
           <h2><strong>Home: </strong></h2>
 
           <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${elemento}" method="post">
-          <!-- <form id="myform" th:action="@{/itemPedido/(incrementar)}" th:object="${elemento}" method="post"> -->
             <label for="Product"><strong>Produto:</strong></label>
 
             <select id="Product" name="Product" th:field="*{produto}">
@@ -50,7 +50,7 @@
             </div>
 
             <br/>
-            <button type="submit" id="btnSalvar" name="incrementar">Adicionar</button>
+            <button type="submit" id="btnSalvar">Adicionar</button>
           </form>
         </div>
 
@@ -78,6 +78,7 @@
                 <td  th:text="${e.custo}">Caracteristicas</td>
                 <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
               </tr>
+              
             </table>
 
             <p th:unless="${lista.size()} > 0">Não há item cadastrado.</p>
@@ -99,6 +100,15 @@
               <button type="button" id="finish">Finish</button>
               <p th:if="${erro != null}" th:text="${erro}"></p>
             </div>
+
+            <table>
+              <tr th:each="e : ${listaPedido}">
+                <td  th:text="${e.id}">ID</td>
+                <td  th:text="${e.itens}">Itens</td>
+                <td  th:text="${e.custoTotal}">custoTotal</td>
+                <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
+              </tr>
+            </table>
           </div>
         </div>
       </div>

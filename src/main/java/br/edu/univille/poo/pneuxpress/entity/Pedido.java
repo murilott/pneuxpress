@@ -16,8 +16,9 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToMany
-    @JoinColumn(name = "pedido_id")
+    // @OneToMany
+    // @JoinColumn(name = "pedido_id")
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<ItemPedido>();
     private float custoTotal;
 
