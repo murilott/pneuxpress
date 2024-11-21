@@ -1,5 +1,6 @@
 package br.edu.univille.poo.pneuxpress.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -15,9 +16,10 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToMany
-    @JoinColumn(name = "pedido_id")
-    private List<ItemPedido> itens;
+    // @OneToMany
+    // @JoinColumn(name = "pedido_id")
+    @ManyToMany(cascade = CascadeType.ALL)
+    private List<ItemPedido> itens = new ArrayList<ItemPedido>();
     private float custoTotal;
 
     public float calculaCustoTotal() {

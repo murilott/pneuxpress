@@ -16,10 +16,10 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nomeDisplay;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "marca_id")
     private Marca marca;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "caracteristicas_id")
     private Caracteristicas caracteristicas;
     private float preco;
