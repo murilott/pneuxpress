@@ -15,6 +15,9 @@
           <h2><strong>Home: </strong></h2>
 
           <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${item}" method="post">
+            <label for="Product"><strong>Id Pedido:</strong></label>
+            {% comment %} <td><input readonly type="text" th:field="*{pedido.id}"></td> {% endcomment %}
+            
             <label for="Product"><strong>Produto:</strong></label>
 
             <select id="Product" name="Product" th:field="*{produto}">

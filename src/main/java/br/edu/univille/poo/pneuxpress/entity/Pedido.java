@@ -18,7 +18,7 @@ public class Pedido {
     private long id;
     // @OneToMany
     // @JoinColumn(name = "pedido_id")
-    @ManyToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ItemPedido> itens = new ArrayList<ItemPedido>();
     private float custoTotal;
 

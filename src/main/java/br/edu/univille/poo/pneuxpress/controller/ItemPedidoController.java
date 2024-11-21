@@ -56,15 +56,16 @@ public class ItemPedidoController {
     public ModelAndView incluirItemPedido(@ModelAttribute("item") ItemPedido item, Pedido pedido) {
         try{
             var mv = new ModelAndView("itemPedido/index");
-            // ItemPedido item = itemPedido;
             item.setCusto(item.calculaCusto());
             // Pedido ped = pedido;
-            // pedido = pedidoService.obterPedidoPeloItem(item);
+
             // if (pedido.getId() == 0 ) {
             //     pedido.setCustoTotal(1);
             // }
             pedido.getItens().add(item);
-            // pedidoService.salvar(pedido);
+            pedidoService.salvar(pedido);
+
+            // item.setPedido(pedido);
 
             service.salvar(item);
 
@@ -93,7 +94,6 @@ public class ItemPedidoController {
             ItemPedido item = itemPedido;
             item.setCusto(item.calculaCusto());
 
-            // nss q perda de tempo - inútil
             Pedido pedido = pedidoService.obterPedidoPeloItem(item);
 
             pedido.getItens().add(item);
