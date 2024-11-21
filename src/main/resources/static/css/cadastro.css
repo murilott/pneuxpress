@@ -24,6 +24,7 @@ li{
     margin: 10px;
 }
 #outer{
+    margin: 1%;
     width: 100%;
     display: flex;
     
@@ -32,9 +33,19 @@ li{
 }
 
 #inner{
+    display: flex;
+    margin: 3%;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
     background-color: #e0dcdc;
     height: 350px;
-    width: 75%;
+    width: 50%;
+}
+
+input{
+    margin-bottom: 5px;
+    margin-top: 5px;
 }
 
 #corpo{
@@ -45,7 +56,7 @@ li{
 }
 
 #cadastraPneu{
-
+    /* margin: 0 auto; */
     padding: 20px;
     margin: 10px;
     width: 300px;
