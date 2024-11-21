@@ -2,51 +2,38 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/cadastro.css">
     <title>Editar Caracteristicas</title>
 </head>
 <body>
-    <div id="header">
-        <h2><strong>PneuXpress</strong></h2>
+    <nav th:replace="layout :: header"></nav>
 
-        <ul id="options">
-          <li><a th:href="@{/estoque}">Estoque</a></li>
-          <!-- <li><a href="home.html">Home</a></li> -->
-          <li><a th:href="@{/cadastros}">Cadastros</a></li>
-          <li><a th:href="@{/produto}">Produtos</a></li>    
-        </ul>
-
-        <ul id="login">
-            <li><a href="editarUser.html">Editar</a></li>
-            <li><a href="cadastro.html">Sign up</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </div>
-<h1>Editar Caracteristicas</h1>
-<p><a th:href="@{/caracteristicas}">Caracteristicas</a> / Editar</p>
-<br>
-<form th:action="@{/caracteristicas/salvar}" th:object="${elemento}" method="post">
-<table>
-    <tr>
-        <td>ID</td>
-        <td><input readonly type="text" th:field="*{id}"></td>
-        <td>Categoria</td>
-        <td>Largura</td>
-        <td>Perfil</td>
-        <td>Aro</td>
-    </tr>
-    <tr>
-        <td><input type="text" th:field="*{categoria}"></td>
-        <td><input type="text" th:field="*{largura}"></td>
-        <td><input type="text" th:field="*{perfil}"></td>
-        <td><input type="text" th:field="*{aro}"></td>
-    </tr>
-    <tr>
-        <td><a th:href="@{/caracteristicas/{id}/excluir(id=${id})}">Excluir</a></td>
-        <td><button type="submit">Salvar</button></td>
-    </tr>
-</table>
-</form>
-<p th:if="${erro != null}" th:text="${erro}"></p>
-<br>
+    <h1>Editar Caracteristicas</h1>
+    <p><a th:href="@{/caracteristicas}">Caracteristicas</a> / Editar</p>
+    <br>
+    <form th:action="@{/caracteristicas/salvar}" th:object="${elemento}" method="post">
+    <table>
+        <tr>
+            <td>ID</td>
+            <td><input readonly type="text" th:field="*{id}"></td>
+            <td>Categoria</td>
+            <td>Largura</td>
+            <td>Perfil</td>
+            <td>Aro</td>
+        </tr>
+        <tr>
+            <td><input type="text" th:field="*{categoria}"></td>
+            <td><input type="text" th:field="*{largura}"></td>
+            <td><input type="text" th:field="*{perfil}"></td>
+            <td><input type="text" th:field="*{aro}"></td>
+        </tr>
+        <tr>
+            <td><a th:href="@{/caracteristicas/{id}/excluir(id=${id})}">Excluir</a></td>
+            <td><button type="submit">Salvar</button></td>
+        </tr>
+    </table>
+    </form>
+    <p th:if="${erro != null}" th:text="${erro}"></p>
+    <br>
 </body>
 </html>

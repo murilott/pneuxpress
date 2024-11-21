@@ -9,22 +9,7 @@
     <title>Nova Caracteristica</title>
 </head>
 <body>
-    <div id="header">
-        <h2><strong>PneuXpress</strong></h2>
-
-        <ul id="options">
-          <li><a th:href="@{/estoque}">Estoque</a></li>
-          <!-- <li><a href="home.html">Home</a></li> -->
-          <li><a th:href="@{/cadastros}">Cadastros</a></li>
-          <li><a th:href="@{/produto}">Produtos</a></li>    
-        </ul>
-
-        <ul id="login">
-            <li><a href="editarUser.html">Editar</a></li>
-            <li><a href="cadastro.html">Sign up</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </div>
+    <nav th:replace="layout :: header"></nav>
 
     <div id="corpo">
         <div id="outer">
@@ -33,53 +18,8 @@
             <button>Voltar</button>
         </div>
 
-        <!-- <div id="inner">
-            <form id="cadastraPneu" th:action="@{/caracteristica/salvar}" th:object="${elemento}" method="post">
-                <label for="categoria">Categoria</label>
-                <select name="categoria" id="categoria" th:field="*{categoria}">
-                    <option th:each="categoria : ${lista}"
-                        th:value="${categoria.nome}"
-                        th:text="${categoria.nome}">
-                    </option>
-                </select>
-
-                <label for="largura">Largura</label>
-                <select name="largura" id="largura" th:field="*{largura}">
-                    <option th:each="largura : ${lista}"
-                        th:value="${largura.nome}"
-                        th:text="${largura.nome}">
-                    </option>
-                </select>
-
-                <label for="perfil">Perfil</label>
-                <select name="perfil" id="perfil" th:field="*{perfil}">
-                    <option th:each="perfil : ${lista}"
-                        th:value="${perfil.nome}"
-                        th:text="${perfil.nome}">
-                    </option>
-                </select>
-
-                <label for="aro">Aro</label>
-                <select name="aro" id="aro" th:field="*{aro}">
-                    <option th:each="aro : ${lista}"
-                        th:value="${aro.nome}"
-                        th:text="${aro.nome}">
-                    </option>
-                </select>
-                <input type="text" name="dim" id="dim" placeholder="Dimensões: " th:field="*{caracteristicas}">
-                <input type="number" name="preco" id="preco" placeholder="Preço: " th:field="*{preco}">
-                <input type="text" name="nome" id="nome" placeholder="Nome: " th:field="*{nomeDisplay}">
-                <input type="number" name="quantidade" id="quantidade" placeholder="Quantidade: " th:field="*{quantidadeEstoque}">
-                <input type="text" name="imagem" id="imagem" placeholder="Imagem: " th:field="*{imagem}">
-                <button id="btnSalvar" type="submit">Salvar</button>
-            </form>
-
-            <p th:if="${erro != null}" th:text="${erro}"></p>
-        </div> -->
-
         <div id="inner">
             <form id="cadastraPneu" th:action="@{/caracteristicas/salvar}" th:object="${elemento}" method="post">
-                
                 <input type="text" name="cat" id="cat" placeholder="Categoria: " th:field="*{categoria}">
                 <input type="text" name="lar" id="lar" placeholder="Largura: " th:field="*{largura}">
                 <input type="text" name="per" id="per" placeholder="Perfil: " th:field="*{perfil}">

@@ -25,7 +25,7 @@ public class EstoqueController {
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("estoque/index");
-        mv.addObject("listaProduto", marcaService.obterTodos());
+        mv.addObject("listaProduto", produtoService.obterTodos());
         return mv;
     }
 }
