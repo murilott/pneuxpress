@@ -5,6 +5,22 @@
     <title>Caracteristicas</title>
 </head>
 <body>
+    <div id="header">
+        <h2><strong>PneuXpress</strong></h2>
+
+        <ul id="options">
+          <li><a th:href="@{/estoque}">Estoque</a></li>
+          <!-- <li><a href="home.html">Home</a></li> -->
+          <li><a th:href="@{/cadastros}">Cadastros</a></li>
+          <li><a th:href="@{/produto}">Produtos</a></li>    
+        </ul>
+
+        <ul id="login">
+            <li><a href="editarUser.html">Editar</a></li>
+            <li><a href="cadastro.html">Sign up</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </div>
 <h1>Caracteristicas</h1>
 <p><a th:href="@{/caracteristicas/novo}">Novo</a></p>
 <br>
