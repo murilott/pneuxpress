@@ -2,46 +2,33 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/cadastro.css">
     <title>Caracteristicas</title>
 </head>
 <body>
-    <div id="header">
-        <h2><strong>PneuXpress</strong></h2>
+    <nav th:replace="layout :: header"></nav>
 
-        <ul id="options">
-          <li><a th:href="@{/estoque}">Estoque</a></li>
-          <!-- <li><a href="home.html">Home</a></li> -->
-          <li><a th:href="@{/cadastros}">Cadastros</a></li>
-          <li><a th:href="@{/produto}">Produtos</a></li>    
-        </ul>
-
-        <ul id="login">
-            <li><a href="editarUser.html">Editar</a></li>
-            <li><a href="cadastro.html">Sign up</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </div>
-<h1>Caracteristicas</h1>
-<p><a th:href="@{/caracteristicas/novo}">Novo</a></p>
-<br>
-<table th:if="${lista.size()} > 0">
-    <tr>
-        <td>ID</td>
-        <td>Categoria</td>
-        <td>Largura</td>
-        <td>Perfil</td>
-        <td>Aro</td>
-    </tr>
-    <tr th:each="e : ${lista}">
-        <td th:text="${e.id}">ID</td>
-        <td  th:text="${e.categoria}">Categoria</td>
-        <td  th:text="${e.largura}">Largura</td>
-        <td  th:text="${e.perfil}">Perfil</td>
-        <td  th:text="${e.aro}">Aro</td>
-        <td><a th:href="@{/caracteristicas/{id}(id=${e.id})}">Editar</a></td>
-    </tr>
-</table>
-<p th:unless="${lista.size()} > 0">Não há caracteristicas cadastradas.</p>
-<br>
+    <h1>Caracteristicas</h1>
+    <p><a th:href="@{/caracteristicas/novo}">Novo</a></p>
+    <br>
+    <table th:if="${lista.size()} > 0">
+        <tr>
+            <td>ID</td>
+            <td>Categoria</td>
+            <td>Largura</td>
+            <td>Perfil</td>
+            <td>Aro</td>
+        </tr>
+        <tr th:each="e : ${lista}">
+            <td th:text="${e.id}">ID</td>
+            <td  th:text="${e.categoria}">Categoria</td>
+            <td  th:text="${e.largura}">Largura</td>
+            <td  th:text="${e.perfil}">Perfil</td>
+            <td  th:text="${e.aro}">Aro</td>
+            <td><a th:href="@{/caracteristicas/{id}(id=${e.id})}">Editar</a></td>
+        </tr>
+    </table>
+    <p th:unless="${lista.size()} > 0">Não há caracteristicas cadastradas.</p>
+    <br>
 </body>
 </html>
