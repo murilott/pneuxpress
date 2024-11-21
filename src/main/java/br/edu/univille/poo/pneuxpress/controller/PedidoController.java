@@ -11,18 +11,24 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.poo.pneuxpress.entity.Pedido;
 import br.edu.univille.poo.pneuxpress.service.PedidoService;
+import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 
 @Controller
-@RequestMapping("/pedido")
+@RequestMapping("/opedido")
 public class PedidoController {
     
     @Autowired
     private PedidoService service;
 
+    @Autowired
+    private ProdutoService produtoService;
+
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("pedido/index");
         mv.addObject("lista", service.obterTodos());
+        mv.addObject("elemento", new Pedido());
+        mv.addObject("listaProduto", produtoService.obterTodos());
         return mv;
     }
 
@@ -31,6 +37,7 @@ public class PedidoController {
     public ModelAndView novo(){
         var mv = new ModelAndView("pedido/novo");
         mv.addObject("elemento", new Pedido());
+        mv.addObject("listaProduto", produtoService.obterTodos());
         return mv;
     }
 
@@ -43,6 +50,7 @@ public class PedidoController {
         }catch (Exception e){
             var mv = new ModelAndView("pedido/novo");
             mv.addObject("elemento", pedido);
+            mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;
         }
@@ -56,6 +64,7 @@ public class PedidoController {
         
         if(opt.isPresent()) {
             mv.addObject("elemento", opt.get());
+            mv.addObject("listaProduto", produtoService.obterTodos());
             return mv;
         }
 

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="../../static/css/cadastro.css"> -->
+    <link rel="stylesheet" href="/css/cadastro.css">
+    <title>Link map</title>
+</head>
+<body>
+    <div id="header">
+        <h2><strong>PneuXpress</strong></h2>
+
+        <ul id="options">
+          <li><a th:href="@{/estoque}">Estoque</a></li>
+          <!-- <li><a href="home.html">Home</a></li> -->
+          <li><a th:href="@{/cadastros}">Cadastros</a></li>
+          <li><a th:href="@{/produto}">Produtos</a></li>    
+          <li><a th:href="@{/itemPedido}">itemPedido</a></li>    
+        </ul>
+
+        <ul id="login">
+            <li><a href="editarUser.html">Editar</a></li>
+            <li><a href="cadastro.html">Sign up</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </div>
+
+    <div id="corpo">
+        <div id="outer">
+    
+        </div>
+
+        <div id="inner">
+           <!-- <p>Links</p> -->
+           <p>Bem vindo</p>
+           <p>Selecione 1 link acima</p>
+           
+            <!-- <ul id="options">
+                <li><a th:href="@{/estoque}">Estoque</a></li>
+                <li><a th:href="@{/cadastros}">Cadastros</a></li>
+                <li><a th:href="@{/produto}">Produtos</a></li>    
+            </ul> -->
+        </div>
+    </div>
+</body>
+</html>
