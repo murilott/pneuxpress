@@ -27,7 +27,7 @@
         <div class="form">
           <h2><strong>Home: </strong></h2>
 
-          <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${elemento}" method="post">
+          <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${item}" method="post">
             <label for="Product"><strong>Produto:</strong></label>
 
             <select id="Product" name="Product" th:field="*{produto}">
@@ -58,12 +58,15 @@
           
           <div class="tabela">
             <h3><strong>Cart:</strong></h3>
-            <p th:text="'pedido: ' + ${pedido.id}"></p>
+            <p th:text="'pedido id: ' + ${pedido.id}"></p>
+            <p th:text="'custo: ' + ${pedido.calculaCustoTotal()}"></p>
 
             <!-- <table id="tabela2" th:if="${pedido.itens.size()} > 0"> -->
             <table id="tabela2" > <!-- th:if="${pedido.itens}"-->
               <tr>
-                <th id="id proda"><strong>Code</strong></th>
+                <th id="id ped"><strong>Code pedido</strong></th>
+                <th id="id"><strong>Code item</strong></th>
+                <th id="id proda"><strong>Code prod</strong></th>
                 <th id="prod1"><strong>Product</strong></th>
                 <th id="UnitPrice"><strong>Unit price</strong></th>
                 <th id="Amount"><strong>Amount</strong></th>
@@ -71,7 +74,9 @@
                 <th></th>
               </tr>
               <tr th:each="e : ${pedido.itens}">
-                <td  th:text="${e.id}">ID</td>
+                <td  th:text="${pedido.id}">ID</td>
+                <td  th:text="${e.id}">ID item</td>
+                <td  th:text="${e.produto.id}">ID prod</td>
                 <td  th:text="${e.produto.nomeDisplay}">Nome</td>
                 <td  th:text="${e.produto.preco}">Marca</td>
                 <td  th:text="${e.quantidade}">Preço</td>

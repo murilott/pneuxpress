@@ -31,7 +31,7 @@ public class ItemPedidoController {
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("itemPedido/index");
-        mv.addObject("elemento", new ItemPedido());
+        mv.addObject("item", new ItemPedido());
         mv.addObject("pedido", new Pedido());
         mv.addObject("listaProduto", produtoService.obterTodos());
         mv.addObject("listaPedido", pedidoService.obterTodos());
@@ -50,33 +50,37 @@ public class ItemPedidoController {
     }
 
     // https://github.com/murilott/sisacademia/blob/main/src/main/java/br/univille/sisacademia/controller/RotinaController.java
+    // god https://medium.com/@AlexanderObregon/data-mapping-with-springs-modelattribute-annotation-b41704c2521a
 
     @RequestMapping("/salvar")
-    public ModelAndView incluirItemPedido(@ModelAttribute("elemento") ItemPedido item, Pedido pedido) {
+    public ModelAndView incluirItemPedido(@ModelAttribute("item") ItemPedido item, Pedido pedido) {
         try{
             var mv = new ModelAndView("itemPedido/index");
             // ItemPedido item = itemPedido;
             item.setCusto(item.calculaCusto());
             // Pedido ped = pedido;
+            // pedido = pedidoService.obterPedidoPeloItem(item);
+            // if (pedido.getId() == 0 ) {
+            //     pedido.setCustoTotal(1);
+            // }
             pedido.getItens().add(item);
-            // pedido.getItens().add(item);
-
             // pedidoService.salvar(pedido);
+
             service.salvar(item);
 
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
-            mv.addObject("elemento", new ItemPedido());
-            mv.addObject("pedido", pedido);
+            // mv.addObject("elemento", new ItemPedido());
+            // mv.addObject("pedido", pedido);
             return mv;
         } catch (Exception e){
             var mv = new ModelAndView("itemPedido/index");
-            mv.addObject("elemento", item);
+            // mv.addObject("item", item);
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
-            mv.addObject("pedido", pedido);
+            // mv.addObject("pedido", pedido);
             mv.addObject("erro", e.getMessage());
             return mv;
         }
