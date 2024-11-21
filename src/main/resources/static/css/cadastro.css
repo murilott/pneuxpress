@@ -5,6 +5,16 @@
 
 body{
     background-color: #685c7c;
+    display: flex; 
+    flex-direction: column;
+    align-content: center;
+
+
+}
+
+.meio{
+    display: flex;
+    align-items: center;
 }
 
 #header{
@@ -67,4 +77,23 @@ input{
 #meio {
     display: flex;
     justify-content: center;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a.hover{
+    color: #f3f3f3;
+}
+
+li{
+    text-decoration: none;
+}
+
+td {
+    width: fit-content;
+    height: fit-content;
+    width: 90px;
 }
