@@ -27,8 +27,8 @@ public class ItemPedidoService {
         return repository.findAll(Sort.by("produto"));
     }
 
-    public void salvar(ItemPedido itemPedido) {
-        repository.save(itemPedido);
+    public ItemPedido salvar(ItemPedido itemPedido) {
+        return repository.save(itemPedido);
     }
 
     public void excluir(ItemPedido itemPedido) {

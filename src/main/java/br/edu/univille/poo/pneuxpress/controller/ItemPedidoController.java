@@ -1,5 +1,8 @@
 package br.edu.univille.poo.pneuxpress.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +34,20 @@ public class ItemPedidoController {
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("itemPedido/index");
+        
+        ItemPedido novoItem = new ItemPedido();
         Pedido novoPedido = pedidoService.salvar(new Pedido());
-        mv.addObject("item", new ItemPedido());
-        mv.addObject("pedido", novoPedido);
+        novoItem.setPedido(novoPedido);
+        novoItem = service.salvar(novoItem);
+
+        mv.addObject("novoItem", novoItem);
+        // mv.addObject("novoPedido", new Pedido());
+        // mv.addObject("novoItem", new ItemPedido());
+
         mv.addObject("listaProduto", produtoService.obterTodos());
         mv.addObject("listaPedido", pedidoService.obterTodos());
         mv.addObject("lista", service.obterTodos());
+
         return mv;
     }
 
@@ -50,11 +61,53 @@ public class ItemPedidoController {
         return mv;
     }
 
+    @PostMapping
+    @RequestMapping("/incrementar")
+    public ModelAndView incluirItemPedido(ItemPedido item) { //, ItemPedido item
+        try{
+            var mv = new ModelAndView("itemPedido/index");
+            item.setCusto(item.calculaCusto());
+            item.getPedido().getItens().add(item);
+
+            // item.setPedido(null);
+
+            // service.salvar(item);
+
+            ItemPedido novoItem = new ItemPedido();
+            novoItem.setPedido(item.getPedido());
+            novoItem = service.salvar(novoItem);
+
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("listaPedido", pedidoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            // mv.addObject("novoItem", new ItemPedido());
+
+            mv.addObject("novoItem", novoItem);
+            // mv.addObject("novoPedido", new Pedido());
+
+            return mv;
+        } catch (Exception e){
+            var mv = new ModelAndView("itemPedido/index");
+            // mv.addObject("novoItem", item);
+            // mv.addObject("novoPedido", new Pedido());
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            mv.addObject("novoItem", new ItemPedido());
+            
+            mv.addObject("erro", e.getMessage());
+            // mv.addObject("erro", e.getMessage());
+
+            return mv;
+        }
+    }
+   
+
     // https://github.com/murilott/sisacademia/blob/main/src/main/java/br/univille/sisacademia/controller/RotinaController.java
     // god https://medium.com/@AlexanderObregon/data-mapping-with-springs-modelattribute-annotation-b41704c2521a
 
-    @RequestMapping("/salvar")
-    public ModelAndView incluirItemPedido(@ModelAttribute("item") ItemPedido item) { //, Pedido pedido
+    
+    @RequestMapping("/salvarAntigo")
+    public ModelAndView incluirItemPedidoAntigo(@ModelAttribute("item") ItemPedido item) { //, Pedido pedido
         try{
             var mv = new ModelAndView("itemPedido/index");
             item.setCusto(item.calculaCusto());
