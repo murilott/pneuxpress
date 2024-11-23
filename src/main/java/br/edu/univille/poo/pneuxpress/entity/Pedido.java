@@ -30,4 +30,9 @@ public class Pedido {
         
         return custoTotal;
     }
+
+    @Override
+    public String toString() {
+        return "Pedido{id=" + id + ", itensCount=" + itens.size() + ", custoTotal=" + custoTotal + "}";
+    }
 }

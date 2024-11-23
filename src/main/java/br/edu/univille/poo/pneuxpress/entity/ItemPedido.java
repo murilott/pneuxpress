@@ -15,7 +15,7 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.PERSIST}) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
     @ManyToOne
@@ -28,5 +28,10 @@ public class ItemPedido {
     public double calculaCusto() {
         custo = (getProduto().getPreco() * quantidade) + imposto;
         return custo;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemPedido{id=" + id + ", produto=" + produto.getNomeDisplay() + ", quantidade=" + quantidade + ", custo=" + custo + "}";
     }
 }

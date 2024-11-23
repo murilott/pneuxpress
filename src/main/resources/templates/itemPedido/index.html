@@ -68,7 +68,7 @@
                   <th></th>
                 </tr>
 
-                <tr th:each="e : ${listaTempitem}">
+                <tr th:each="e : ${pedido?.itens}">
                   <td  th:text="${pedido.id}"></td>
                   <td  th:text="${e.id}"></td>
                   <td  th:text="${e.produto.id}"></td>
@@ -123,6 +123,8 @@
                 <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
               </tr>
             </table>
+
+            <br>
 
             <table>
               <tr th:each="e : ${lista}">

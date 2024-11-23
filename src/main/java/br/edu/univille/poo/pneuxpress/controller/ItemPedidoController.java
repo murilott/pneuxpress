@@ -40,13 +40,13 @@ public class ItemPedidoController {
         novoItem.setPedido(novoPedido);
         novoItem = service.salvar(novoItem);
 
-        mv.addObject("novoItem", novoItem);
         // mv.addObject("novoPedido", new Pedido());
         // mv.addObject("novoItem", new ItemPedido());
-
+        
         mv.addObject("listaProduto", produtoService.obterTodos());
         mv.addObject("listaPedido", pedidoService.obterTodos());
         mv.addObject("lista", service.obterTodos());
+        mv.addObject("novoItem", novoItem);
 
         return mv;
     }
@@ -67,15 +67,22 @@ public class ItemPedidoController {
         try{
             var mv = new ModelAndView("itemPedido/index");
             item.setCusto(item.calculaCusto());
+
+            if (item.getPedido() == null || item.getPedido().getId() == 0) {
+                Pedido novoPedido = new Pedido();
+                pedidoService.salvar(novoPedido); 
+
+                item.setPedido(novoPedido); 
+            }
+
             item.getPedido().getItens().add(item);
 
             // item.setPedido(null);
 
-            // service.salvar(item);
+            service.salvar(item);
 
             ItemPedido novoItem = new ItemPedido();
             novoItem.setPedido(item.getPedido());
-            novoItem = service.salvar(novoItem);
 
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
@@ -83,6 +90,7 @@ public class ItemPedidoController {
             // mv.addObject("novoItem", new ItemPedido());
 
             mv.addObject("novoItem", novoItem);
+            mv.addObject("pedido", item.getPedido());
             // mv.addObject("novoPedido", new Pedido());
 
             return mv;
