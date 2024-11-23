@@ -17,10 +17,10 @@ public class Produto {
     private long id;
     private String nomeDisplay;
     @ManyToOne
-    @JoinColumn(name = "marca_id")
+    @JoinColumn(name = "marca_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_produto_marca"))
     private Marca marca;
     @ManyToOne
-    @JoinColumn(name = "caracteristicas_id")
+    @JoinColumn(name = "caracteristicas_id", nullable = false, referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_produto_caracteristicas"))
     private Caracteristicas caracteristicas;
     private float preco;
     private int quantidadeEstoque;

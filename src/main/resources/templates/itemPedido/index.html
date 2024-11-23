@@ -19,7 +19,7 @@
           <form id="myform" th:action="@{/itemPedido/incrementar}" th:object="${novoItem}" method="post">
             
             <label for="Producto"><strong>Id Pedido ItemPedido:</strong></label>
-            <!-- <td><input readonly type="text" th:field="*{pedido.id}"></td> -->
+            <td><input readonly type="text" th:field="*{pedido.id}"></td>
 
             <br>
 
@@ -40,7 +40,7 @@
               <input type="text" id="total" name="total" readonly placeholder="Total:"/>
 
               <div id="flex">
-                <input type="text" id="unitprice" name="unitprice" readonly placeholder="Unit Price" th:field="*{produto.preco}"/> <!--  -->
+                <input type="text" id="unitprice" name="unitprice" readonly placeholder="Unit Price" th:text="*{produto?.preco}"/> 
                 <input type="text" id="tax" name="tax" placeholder="Tax" disabled/>
                 <input type="text" id="totalTax" name="totalTax" placeholder="Total Tax" disabled/>
               </div>
@@ -113,7 +113,11 @@
               <button type="button" id="finish">Finish</button>
               <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
               <p th:if="${erro != null}" th:text="${erro}"></p>
+              <p th:if="${erro2 != null}" th:text="${erro}"></p>
+              <p th:if="${print != null}" th:text="${print}"></p>
             </div>
+
+            <br>
 
             <table>
               <tr th:each="e : ${listaPedido}">
@@ -126,6 +130,7 @@
 
             <br>
 
+
             <table>
               <tr th:each="e : ${lista}">
                 <td  th:text="${e.id}">ID</td>
@@ -135,6 +140,22 @@
                 <td  th:text="${e.custo}">Custo</td>
               </tr>
             </table>
+
+            <br>
+
+            <label for="Product"><strong>Pedido do getPedido():</strong></label>
+
+
+            <tr th:each="e : ${pedido?.itens}">
+              <td  th:text="${pedido.id}"></td>
+              <td  th:text="${e.id}"></td>
+              <td  th:text="${e.produto.id}"></td>
+              <td  th:text="${e.produto.nomeDisplay}"></td>
+              <td  th:text="${e.produto.preco}"></td>
+              <td  th:text="${e.quantidade}"></td>
+              <td  th:text="${e.custo}"></td>
+              <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
+            </tr>
           </div>
         </div>
       </div>

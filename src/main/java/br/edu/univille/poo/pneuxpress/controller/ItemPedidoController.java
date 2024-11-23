@@ -36,9 +36,9 @@ public class ItemPedidoController {
         var mv = new ModelAndView("itemPedido/index");
         
         ItemPedido novoItem = new ItemPedido();
-        Pedido novoPedido = pedidoService.salvar(new Pedido());
-        novoItem.setPedido(novoPedido);
-        novoItem = service.salvar(novoItem);
+        // Pedido novoPedido = pedidoService.salvar(new Pedido());
+        // novoItem.setPedido(novoPedido);
+        // novoItem = service.salvar(novoItem);
 
         // mv.addObject("novoPedido", new Pedido());
         // mv.addObject("novoItem", new ItemPedido());
@@ -63,26 +63,33 @@ public class ItemPedidoController {
 
     @PostMapping
     @RequestMapping("/incrementar")
-    public ModelAndView incluirItemPedido(ItemPedido item) { //, ItemPedido item
+    public ModelAndView incluirItemPedido(@ModelAttribute("novoItem") ItemPedido item) { //, ItemPedido item
         try{
             var mv = new ModelAndView("itemPedido/index");
             item.setCusto(item.calculaCusto());
-
+            mv.addObject("print", item.getPedido());
+            
+            
             if (item.getPedido() == null || item.getPedido().getId() == 0) {
                 Pedido novoPedido = new Pedido();
-                pedidoService.salvar(novoPedido); 
-
+                novoPedido = pedidoService.salvar(novoPedido); 
+                
                 item.setPedido(novoPedido); 
-            }
-
+                // mv.addObject("print", "Entrou no if");
+            } 
+            // mv.addObject("print", "Passou fora if");
+            
             item.getPedido().getItens().add(item);
-
+            
             // item.setPedido(null);
+            
 
-            service.salvar(item);
-
+            item = service.salvar(item);
+            
             ItemPedido novoItem = new ItemPedido();
             novoItem.setPedido(item.getPedido());
+
+            // mv.addObject("print", novoItem.getPedido().getId());
 
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
@@ -101,7 +108,7 @@ public class ItemPedidoController {
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
             mv.addObject("novoItem", new ItemPedido());
-            
+            mv.addObject("print", item.getPedido());
             mv.addObject("erro", e.getMessage());
             // mv.addObject("erro", e.getMessage());
 
