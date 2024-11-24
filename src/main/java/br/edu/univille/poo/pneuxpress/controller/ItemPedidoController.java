@@ -80,7 +80,7 @@ public class ItemPedidoController {
             Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
             pedido.getItens().add(item);
 
-            mv.addObject("print", pedido.getItens());
+            // mv.addObject("print", pedido.getItens());
             
             // item.setPedido(null);
             
@@ -88,7 +88,7 @@ public class ItemPedidoController {
             novoItem.setPedido(pedido);
             
             item = service.salvar(item);
-            // mv.addObject("print", novoItem.getPedido().getId());
+            mv.addObject("print", novoItem.getPedido().getItens());
 
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
@@ -96,7 +96,7 @@ public class ItemPedidoController {
             // mv.addObject("novoItem", new ItemPedido());
 
             mv.addObject("novoItem", novoItem);
-            mv.addObject("pedido", item.getPedido());
+            mv.addObject("pedido", novoItem.getPedido());
             // mv.addObject("novoPedido", new Pedido());
 
             return mv;
