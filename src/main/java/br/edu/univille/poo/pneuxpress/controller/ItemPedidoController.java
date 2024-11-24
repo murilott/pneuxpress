@@ -79,7 +79,9 @@ public class ItemPedidoController {
 
             Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
             pedido.getItens().add(item);
+            // pedido.setCustoTotal(pedido.calculaCustoTotal());
 
+            
             // mv.addObject("print", pedido.getItens());
             
             // item.setPedido(null);
@@ -87,9 +89,13 @@ public class ItemPedidoController {
             ItemPedido novoItem = new ItemPedido();
             novoItem.setPedido(pedido);
             
+            
             item = service.salvar(item);
-            mv.addObject("print", novoItem.getPedido().getItens());
+            
+            pedido.setCustoTotal(pedido.calculaCustoTotal());
 
+            mv.addObject("print", novoItem.getPedido().getItens());
+            
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
@@ -193,6 +199,24 @@ public class ItemPedidoController {
             mv.addObject("erro", e.getMessage());
             return mv;
         }
+    }
+
+    @GetMapping
+    @RequestMapping("selecionar/{id}")
+    public ModelAndView selecionar(@PathVariable long id, ItemPedido item){
+        var mv = new ModelAndView("itemPedido/index");
+        var opt = pedidoService.obterPeloId(id);
+        
+        if(opt.isPresent()) {
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("listaPedido", pedidoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            mv.addObject("novoItem", new ItemPedido());
+            mv.addObject("pedido", opt.get());
+            return mv;
+        }
+
+        return new ModelAndView("redirect:/itemPedido");
     }
 
     @GetMapping

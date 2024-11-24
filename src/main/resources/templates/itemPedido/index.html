@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/cadastro.css">
-    <title>Document</title>
+    <title>Novo Pedido</title>
 </head>
 <body>
   <nav th:replace="layout :: header"></nav>
@@ -99,22 +99,21 @@
         <div id="Categories" class="flex-container2">
           <div class="flex-container3">
             <div class="paga">
-              <form id="pagamento">
-                <label for="taxed"><strong>Tax:</strong></label>
-                <input type="text" id="taxed" name="taxed" disabled/><br />
-                <label for="totaled"><strong>Total:</strong></label>
-                <input type="text" id="totaled" name="totaled" disabled/>
-              </form>
-            </div>
-
-
-            <div class="botao">
-              <button type="button" id="cancel">Cancel</button>
-              <button type="button" id="finish">Finish</button>
-              <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
-              <p th:if="${erro != null}" th:text="${erro}"></p>
-              <p th:if="${erro2 != null}" th:text="${erro}"></p>
-              <p th:if="${print != null}" th:text="${print}"></p>
+              <label for="taxed"><strong>Imposto:</strong></label>
+              <input type="text" id="taxed" name="taxed" disabled/><br />
+              <label for="totaled"><strong>Total:</strong></label>
+              <input type="text" id="totaled" name="totaled" disabled th:text="${pedido?.custoTotal}"/>
+            
+              <div class="botao">
+                <button type="button" id="cancel">Cancelar</button>
+                <!-- <a th:href="@{/pedido/salvar/{id}(id=${pedido?.id})}">Finalizar</a> -->
+                <a th:href="@{'/pedido/salvar/' + ${pedido?.id}}">Finalizar</a>
+                <!-- <button type="submit" id="finish">Finalizar</button> -->
+                <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
+                <p th:if="${erro != null}" th:text="${erro}"></p>
+                <p th:if="${erro2 != null}" th:text="${erro}"></p>
+                <p th:if="${print != null}" th:text="${print}"></p>
+              </div>
             </div>
 
             <br>
@@ -126,15 +125,15 @@
                 <td  th:text="${e.id}">ID</td>
                 <td  th:text="${e.itens}">Itens</td>
                 <td  th:text="${e.custoTotal}">custoTotal</td>
-                <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
+                <td><a th:href="@{/itemPedido/selecionar/{id}(id=${e.id})}">Visualizar</a></td>
               </tr>
             </table>
 
-            <br>
+            <!-- <br>
 
-            <label for="Product"><strong>Lista itenPedido:</strong></label>
+            <label for="Product"><strong>Lista itenPedido:</strong></label> --> -->
 
-            <table>
+            <!-- <table>
               <tr th:each="e : ${lista}">
                 <td  th:text="${e.id}">ID</td>
                 <td  th:text="${e.pedido}">Pedido</td>
@@ -142,14 +141,14 @@
                 <td  th:text="${e.quantidade}">Quantidade</td>
                 <td  th:text="${e.custo}">Custo</td>
               </tr>
-            </table>
+            </table> -->
 
-            <br>
+            <!-- <br>
 
-            <label for="Product"><strong>Pedido do getPedido():</strong></label>
+            <label for="Product"><strong>Pedido do getPedido():</strong></label> -->
 
 
-            <tr th:each="e : ${pedido?.itens}">
+            <!-- <tr th:each="e : ${pedido?.itens}">
               <td  th:text="${pedido.id}"></td>
               <td  th:text="${e.id}"></td>
               <td  th:text="${e.produto.id}"></td>
@@ -157,8 +156,8 @@
               <td  th:text="${e.produto.preco}"></td>
               <td  th:text="${e.quantidade}"></td>
               <td  th:text="${e.custo}"></td>
-              <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
-            </tr>
+              <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td>
+            </tr> -->
           </div>
         </div>
       </div>

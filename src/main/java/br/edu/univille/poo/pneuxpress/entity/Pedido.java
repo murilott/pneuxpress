@@ -25,6 +25,7 @@ public class Pedido {
 
     public float calculaCustoTotal() {
         for (int i=0; i<itens.size(); i++) {
+            System.out.println(itens.size());
             custoTotal += itens.get(i).getCusto();
         }
         

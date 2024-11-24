@@ -41,13 +41,15 @@ public class PedidoController {
         return mv;
     }
 
-    @PostMapping
-    @RequestMapping("/salvar")
-    public ModelAndView salvarNovo(@ModelAttribute("elemento") Pedido pedido){
+    @GetMapping
+    @RequestMapping("/salvar/{id_pedido}")
+    public ModelAndView salvarNovo(@PathVariable("id_pedido") long id_pedido){
         try{
+            Pedido pedido = service.obterPeloId(id_pedido).get();
             service.salvar(pedido);
-            return new ModelAndView("redirect:/pedido");
+            return new ModelAndView("redirect:/itemPedido");
         }catch (Exception e){
+            Pedido pedido = service.obterPeloId(id_pedido).get();
             var mv = new ModelAndView("pedido/novo");
             mv.addObject("elemento", pedido);
             mv.addObject("listaProduto", produtoService.obterTodos());
