@@ -63,12 +63,10 @@ public class ItemPedidoController {
 
     @PostMapping
     @RequestMapping("/incrementar")
-    public ModelAndView incluirItemPedido(@ModelAttribute("novoItem") ItemPedido item) { //, ItemPedido item
+    public ModelAndView incluirItemPedido(ItemPedido item) { //, ItemPedido item
         try{
             var mv = new ModelAndView("itemPedido/index");
             item.setCusto(item.calculaCusto());
-            mv.addObject("print", item.getPedido());
-            
             
             if (item.getPedido() == null || item.getPedido().getId() == 0) {
                 Pedido novoPedido = new Pedido();
@@ -78,17 +76,18 @@ public class ItemPedidoController {
                 // mv.addObject("print", "Entrou no if");
             } 
             // mv.addObject("print", "Passou fora if");
-            
-            item.getPedido().getItens().add(item);
+
+            Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
+            pedido.getItens().add(item);
+
+            mv.addObject("print", pedido.getItens());
             
             // item.setPedido(null);
             
-
-            item = service.salvar(item);
-            
             ItemPedido novoItem = new ItemPedido();
-            novoItem.setPedido(item.getPedido());
-
+            novoItem.setPedido(pedido);
+            
+            item = service.salvar(item);
             // mv.addObject("print", novoItem.getPedido().getId());
 
             mv.addObject("listaProduto", produtoService.obterTodos());
