@@ -10,19 +10,13 @@
 <body>
     <nav th:replace="layout :: header"></nav>
 
-    <div id="corpo">
-        <div id="outer">
-            <h2>Cadastrar Produtos</h2>
-            <p><a th:href="@{/cadastrarPneu}">Estoque</a></p>
-            <button>Voltar</button>
-        </div>
-    </div>
 
     <div id="corpo">
         <div id="outer">
         </div>
 
         <div id="inner">
+            <h2>Produtos</h2>
             <div class="produto" th:each="prod : ${listaProduto}">
                 <img th:src="${prod.imagem}" alt="" srcset="">
                 <p th:text="${prod.nomeDisplay}"></p>

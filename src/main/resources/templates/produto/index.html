@@ -7,7 +7,8 @@
 </head>
 <body>
     <nav th:replace="layout :: header"></nav>
-
+    <div id="meio">
+<div id="inner">
     <h1>Produtos</h1>
     <p><a th:href="@{/produto/novo}">Novo</a></p>
     <br>
@@ -34,5 +35,7 @@
     </table>
     <p th:unless="${lista.size()} > 0">Não há produtos cadastrados.</p>
     <br>
+</div>
+</div>
 </body>
 </html>
