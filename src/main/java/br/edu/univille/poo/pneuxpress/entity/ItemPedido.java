@@ -22,11 +22,12 @@ public class ItemPedido {
     @ManyToOne(cascade = CascadeType.MERGE) // (fetch = FetchType.EAGER) //(cascade = CascadeType.ALL)
     @JoinColumn(name = "pedido_id")
     private Pedido pedido;
+    @NotNull(message = "Campo produto não pode ser em branco")
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
     @NotNull(message = "Campo quantidade não pode ser em branco")
-    @Min(1) //, message = "Campo quantidade deve conter, pelo menos, 1 item"
+    @Min(value = 1, message = "Campo quantidade deve conter, pelo menos, 1 item")
     private int quantidade;
     @NotNull(message = "Campo imposto não pode ser em branco")
     private float imposto;
