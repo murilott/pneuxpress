@@ -37,6 +37,8 @@
 
             <div id="gapp">
               <input type="text" id="amount" name="amount" placeholder="Amount" th:field="*{quantidade}"/>
+              <p th:if="${#fields.hasErrors('quantidade')}"
+                    th:errors="*{quantidade}"></p>
               <input type="text" id="total" name="total" readonly placeholder="Total:"/>
 
               <div id="flex">

@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import br.edu.univille.poo.pneuxpress.entity.Pedido;
 import br.edu.univille.poo.pneuxpress.service.ItemPedidoService;
 import br.edu.univille.poo.pneuxpress.service.PedidoService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/itemPedido")
@@ -63,9 +65,23 @@ public class ItemPedidoController {
 
     @PostMapping
     @RequestMapping("/incrementar")
-    public ModelAndView incluirItemPedido(ItemPedido item) { //, ItemPedido item
+    public ModelAndView incluirItemPedido(@Valid ItemPedido item, BindingResult bindingResult) { //, ItemPedido item
         try{
             var mv = new ModelAndView("itemPedido/index");
+            
+            if ( bindingResult.hasErrors() ) {
+                mv = new ModelAndView("itemPedido/index");
+                Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
+
+                mv.addObject("listaProduto", produtoService.obterTodos());
+                mv.addObject("listaPedido", pedidoService.obterTodos());
+                mv.addObject("lista", service.obterTodos());
+                mv.addObject("novoItem", item);
+                mv.addObject("pedido", pedido);
+
+                return mv;
+            }
+
             item.setCusto(item.calculaCusto());
             
             if (item.getPedido() == null || item.getPedido().getId() == 0) {

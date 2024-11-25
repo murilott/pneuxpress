@@ -7,6 +7,10 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 @Data
 @NoArgsConstructor
 @Entity
@@ -21,7 +25,10 @@ public class ItemPedido {
     @ManyToOne
     @JoinColumn(name = "produto_id")
     private Produto produto;
+    @NotNull(message = "Campo quantidade não pode ser em branco")
+    @Min(1) //, message = "Campo quantidade deve conter, pelo menos, 1 item"
     private int quantidade;
+    @NotNull(message = "Campo imposto não pode ser em branco")
     private float imposto;
     private double custo;
 
