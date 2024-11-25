@@ -105,14 +105,14 @@
               <input type="text" id="totaled" name="totaled" disabled th:text="${pedido?.custoTotal}"/>
             
               <div class="botao">
-                <button type="button" id="cancel">Cancelar</button>
-                <!-- <a th:href="@{/pedido/salvar/{id}(id=${pedido?.id})}">Finalizar</a> -->
-                <a th:href="@{'/pedido/salvar/' + ${pedido?.id}}">Finalizar</a>
+                <!-- <button type="button" id="cancel">Cancelar</button> -->
+                <a th:href="@{/pedido/cancelar/{id}(id=${pedido?.id})}">Cancelar</a>
+                <a th:href="@{/pedido/salvar/{id}(id=${pedido?.id})}">Finalizar</a>
+                <!-- <a th:href="@{'/pedido/salvar/' + ${pedido?.id}}">Finalizar</a> -->
                 <!-- <button type="submit" id="finish">Finalizar</button> -->
                 <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
                 <p th:if="${erro != null}" th:text="${erro}"></p>
-                <p th:if="${erro2 != null}" th:text="${erro}"></p>
-                <p th:if="${print != null}" th:text="${print}"></p>
+                <!-- <p th:if="${print != null}" th:text="${print}"></p>  -->
               </div>
             </div>
 

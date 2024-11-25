@@ -14,7 +14,7 @@ import br.edu.univille.poo.pneuxpress.service.PedidoService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
 
 @Controller
-@RequestMapping("/opedido")
+@RequestMapping("/pedido")
 public class PedidoController {
     
     @Autowired
@@ -42,20 +42,41 @@ public class PedidoController {
     }
 
     @GetMapping
-    @RequestMapping("/salvar/{id_pedido}")
-    public ModelAndView salvarNovo(@PathVariable("id_pedido") long id_pedido){
+    @RequestMapping("/salvar/{id}")
+    public ModelAndView salvar(@PathVariable long id){
         try{
-            Pedido pedido = service.obterPeloId(id_pedido).get();
-            service.salvar(pedido);
+            var opt = service.obterPeloId(id);
+
+            if(opt.isPresent()) {
+                Pedido pedido = opt.get();
+                pedido.setCustoTotal(pedido.calculaCustoTotal());
+                // Futuramente setar o usuário aqui
+                service.salvar(pedido);
+
+            }
+
             return new ModelAndView("redirect:/itemPedido");
         }catch (Exception e){
-            Pedido pedido = service.obterPeloId(id_pedido).get();
-            var mv = new ModelAndView("pedido/novo");
-            mv.addObject("elemento", pedido);
+            Pedido pedido = service.obterPeloId(id).get();
+            var mv = new ModelAndView("itemPedido/index");
+            mv.addObject("pedido", pedido);
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("erro", e.getMessage());
             return mv;
         }
+    }
+
+    @GetMapping
+    @RequestMapping("cancelar/{id}")
+    public ModelAndView cancelar(@PathVariable long id){
+        var mv = new ModelAndView("itemPedido/index");
+        var opt = service.obterPeloId(id);
+
+        if(opt.isPresent()) {
+            service.excluir(opt.get());
+        }
+
+        return new ModelAndView("redirect:/itemPedido");
     }
 
     @GetMapping

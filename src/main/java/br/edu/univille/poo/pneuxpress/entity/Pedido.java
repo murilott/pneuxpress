@@ -19,7 +19,7 @@ public class Pedido {
     // @OneToMany
     // @JoinColumn(name = "pedido_id")
     // @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER)
+    @OneToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE }, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<ItemPedido> itens = new ArrayList<ItemPedido>();
     private float custoTotal;
 
