@@ -5,16 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/cadastro.css">
-    <title>Document</title>
+    <title>Novo Pedido</title>
 </head>
 <body>
   <nav th:replace="layout :: header"></nav>
     <div id="meio">
   <div id="inner">
         <div class="form">
-          <h2><strong>Home: </strong></h2>
+          <h2><strong>Novo Pedido: </strong></h2>
+          <!-- <label for="Product"><strong>Id Pedido:</strong></label>
+          <td><input readonly type="text" th:field="*{novoPedido.id}"></td> -->
 
-          <form id="myform" th:action="@{/itemPedido/salvar}" th:object="${item}" method="post">
+          <form id="myform" th:action="@{/itemPedido/incrementar}" th:object="${novoItem}" method="post">
+            
+            <label for="Producto"><strong>Id Pedido ItemPedido:</strong></label>
+            <td><input readonly type="text" th:field="*{pedido.id}"></td>
+
+            <br>
+
+            <label for="Producto"><strong>Id ItemPedido:</strong></label>
+            <td><input readonly type="text" th:field="*{id}"></td>
+            
             <label for="Product"><strong>Produto:</strong></label>
 
             <select id="Product" name="Product" th:field="*{produto}">
@@ -26,81 +37,128 @@
 
             <div id="gapp">
               <input type="text" id="amount" name="amount" placeholder="Amount" th:field="*{quantidade}"/>
-              <input type="text" id="total" name="total" disabled placeholder="Total:"/>
+              <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}"></p>
+              <input type="text" id="total" name="total" readonly placeholder="Total:"/>
 
               <div id="flex">
-                <input type="text" id="unitprice" name="unitprice" disabled placeholder="Unit Price" th:field="*{produto.preco}"/> <!--  -->
+                <input type="text" id="unitprice" name="unitprice" readonly placeholder="Unit Price" th:text="*{produto?.preco}"/> 
                 <input type="text" id="tax" name="tax" placeholder="Tax" disabled/>
                 <input type="text" id="totalTax" name="totalTax" placeholder="Total Tax" disabled/>
               </div>
-              
             </div>
 
-            <br/>
+            <br>
             <button type="submit" id="btnSalvar">Adicionar</button>
+            <br>
+
+            <div class="tabela">
+              <h3><strong>Pedido:</strong></h3>
+              <!-- <p th:text="'pedido id: ' + ${pedido.id}"></p> -->
+              <!-- <p th:text="'custo: ' + ${pedido.calculaCustoTotal()}"></p> -->
+  
+              <!-- <table id="tabela2" th:if="${pedido.itens.size()} > 0"> -->
+              <table id="tabela2" > <!-- th:if="${pedido.itens}"-->
+                <tr>
+                  <th id="id ped"><strong>Id pedido</strong></th>
+                  <th id="id"><strong>Id itemPedido</strong></th>
+                  <th id="id proda"><strong>Id prod</strong></th>
+                  <th id="prod1"><strong>Produto</strong></th>
+                  <th id="UnitPrice"><strong>Preço Unidade</strong></th>
+                  <th id="Amount"><strong>Quantidade</strong></th>
+                  <th id="Total"><strong>Total</strong></th>
+                  <th></th>
+                </tr>
+
+                <tr th:each="e : ${pedido?.itens}">
+                  <td  th:text="${pedido.id}"></td>
+                  <td  th:text="${e.id}"></td>
+                  <td  th:text="${e.produto.id}"></td>
+                  <td  th:text="${e.produto.nomeDisplay}"></td>
+                  <td  th:text="${e.produto.preco}"></td>
+                  <td  th:text="${e.quantidade}"></td>
+                  <td  th:text="${e.custo}"></td>
+                  <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
+                </tr>
+                <!-- <tr th:each="e : ${pedido?.itens}">
+                  <td  th:text="${pedido.id}"></td>
+                  <td  th:text="${e.id}"></td>
+                  <td  th:text="${e.produto.id}"></td>
+                  <td  th:text="${e.produto.nomeDisplay}"></td>
+                  <td  th:text="${e.produto.preco}"></td>
+                  <td  th:text="${e.quantidade}"></td>
+                  <td  th:text="${e.custo}"></td>
+                  <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td>
+                </tr> -->
+              </table>
+  
+              <p th:unless="${lista.size()} > 0">Não há item cadastrado.</p>
+              <p th:if="${pedido == null}">Não há pedido</p>
+            </div>
           </form>
         </div>
 
         <div id="Categories" class="flex-container2">
-          
-          <div class="tabela">
-            <h3><strong>Cart:</strong></h3>
-            <p th:text="'pedido id: ' + ${pedido.id}"></p>
-            <p th:text="'custo: ' + ${pedido.calculaCustoTotal()}"></p>
-
-            <!-- <table id="tabela2" th:if="${pedido.itens.size()} > 0"> -->
-            <table id="tabela2" > <!-- th:if="${pedido.itens}"-->
-              <tr>
-                <th id="id ped"><strong>Code pedido</strong></th>
-                <th id="id"><strong>Code item</strong></th>
-                <th id="id proda"><strong>Code prod</strong></th>
-                <th id="prod1"><strong>Product</strong></th>
-                <th id="UnitPrice"><strong>Unit price</strong></th>
-                <th id="Amount"><strong>Amount</strong></th>
-                <th id="Total"><strong>Total</strong></th>
-                <th></th>
-              </tr>
-              <tr th:each="e : ${pedido.itens}">
-                <td  th:text="${pedido.id}">ID</td>
-                <td  th:text="${e.id}">ID item</td>
-                <td  th:text="${e.produto.id}">ID prod</td>
-                <td  th:text="${e.produto.nomeDisplay}">Nome</td>
-                <td  th:text="${e.produto.preco}">Marca</td>
-                <td  th:text="${e.quantidade}">Preço</td>
-                <td  th:text="${e.custo}">Caracteristicas</td>
-                <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
-              </tr>
-              
-            </table>
-
-            <p th:unless="${lista.size()} > 0">Não há item cadastrado.</p>
-            <p th:if="${pedido == null}" th:text="Não há pedido"></p>
-          </div>
           <div class="flex-container3">
             <div class="paga">
-              <form id="pagamento">
-                <label for="taxed"><strong>Tax:</strong></label>
-                <input type="text" id="taxed" name="taxed" disabled/><br />
-                <label for="totaled"><strong>Total:</strong></label>
-                <input type="text" id="totaled" name="totaled" disabled/>
-              </form>
+              <label for="taxed"><strong>Imposto:</strong></label>
+              <input type="text" id="taxed" name="taxed" disabled/><br />
+              <label for="totaled"><strong>Total:</strong></label>
+              <input type="text" id="totaled" name="totaled" disabled th:text="${pedido?.custoTotal}"/>
+            
+              <div class="botao">
+                <!-- <button type="button" id="cancel">Cancelar</button> -->
+                <a th:href="@{/pedido/cancelar/{id}(id=${pedido?.id})}">Cancelar</a>
+                <a th:href="@{/pedido/salvar/{id}(id=${pedido?.id})}">Finalizar</a>
+                <!-- <a th:href="@{'/pedido/salvar/' + ${pedido?.id}}">Finalizar</a> -->
+                <!-- <button type="submit" id="finish">Finalizar</button> -->
+                <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
+                <p th:if="${erro != null}" th:text="${erro}"></p>
+                <!-- <p th:if="${print != null}" th:text="${print}"></p>  -->
+              </div>
             </div>
 
+            <br>
 
-            <div class="botao">
-              <button type="button" id="cancel">Cancel</button>
-              <button type="button" id="finish">Finish</button>
-              <p th:if="${erro != null}" th:text="${erro}"></p>
-            </div>
+            <label for="Product"><strong>Lista pedido:</strong></label>
 
             <table>
               <tr th:each="e : ${listaPedido}">
                 <td  th:text="${e.id}">ID</td>
                 <td  th:text="${e.itens}">Itens</td>
                 <td  th:text="${e.custoTotal}">custoTotal</td>
-                <!-- <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td> -->
+                <td><a th:href="@{/itemPedido/selecionar/{id}(id=${e.id})}">Visualizar</a></td>
               </tr>
             </table>
+
+            <!-- <br>
+
+            <label for="Product"><strong>Lista itenPedido:</strong></label> --> -->
+
+            <!-- <table>
+              <tr th:each="e : ${lista}">
+                <td  th:text="${e.id}">ID</td>
+                <td  th:text="${e.pedido}">Pedido</td>
+                <td  th:text="${e.produto}">Produto</td>
+                <td  th:text="${e.quantidade}">Quantidade</td>
+                <td  th:text="${e.custo}">Custo</td>
+              </tr>
+            </table> -->
+
+            <!-- <br>
+
+            <label for="Product"><strong>Pedido do getPedido():</strong></label> -->
+
+
+            <!-- <tr th:each="e : ${pedido?.itens}">
+              <td  th:text="${pedido.id}"></td>
+              <td  th:text="${e.id}"></td>
+              <td  th:text="${e.produto.id}"></td>
+              <td  th:text="${e.produto.nomeDisplay}"></td>
+              <td  th:text="${e.produto.preco}"></td>
+              <td  th:text="${e.quantidade}"></td>
+              <td  th:text="${e.custo}"></td>
+              <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td>
+            </tr> -->
           </div>
         </div>
       </div>

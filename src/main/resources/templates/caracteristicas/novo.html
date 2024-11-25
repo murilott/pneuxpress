@@ -22,9 +22,13 @@
             </div>
             <form id="cadastraPneu" th:action="@{/caracteristicas/salvar}" th:object="${elemento}" method="post">
                 <input type="text" name="cat" id="cat" placeholder="Categoria: " th:field="*{categoria}">
+                <p th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}">Erro de categoria</p>
                 <input type="text" name="lar" id="lar" placeholder="Largura: " th:field="*{largura}">
+                <p th:if="${#fields.hasErrors('largura')}" th:errors="*{largura}">Erro de largura</p>
                 <input type="text" name="per" id="per" placeholder="Perfil: " th:field="*{perfil}">
+                <p th:if="${#fields.hasErrors('perfil')}" th:errors="*{perfil}">Erro de perfil</p>
                 <input type="text" name="aro" id="aro" placeholder="Aro: " th:field="*{aro}">
+                <p th:if="${#fields.hasErrors('aro')}" th:errors="*{aro}">Erro de aro</p>
 
                 <button id="btnSalvar" type="submit">Salvar</button>
             </form>

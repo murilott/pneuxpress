@@ -21,6 +21,7 @@
             <form id="cadastraPneu" th:action="@{/marca/salvar}" th:object="${elemento}" method="post">
                 <h2>Cadastrar Marca</h2>
                 <input type="text" name="nome" id="nome" placeholder="Nome: " th:field="*{nome}">
+                <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Erro de nome</p>
                 <button id="btnSalvar" type="submit">Salvar</button>
             </form>
 

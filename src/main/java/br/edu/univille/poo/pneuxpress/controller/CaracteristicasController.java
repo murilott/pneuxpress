@@ -2,6 +2,7 @@ package br.edu.univille.poo.pneuxpress.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.poo.pneuxpress.entity.Caracteristicas;
 import br.edu.univille.poo.pneuxpress.service.CaracteristicasService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/caracteristicas")
@@ -37,8 +39,14 @@ public class CaracteristicasController {
 
     @PostMapping
     @RequestMapping("/salvar")
-    public ModelAndView salvarNovo(@ModelAttribute("elemento") Caracteristicas caracteristicas){
+    public ModelAndView salvarNovo(@Valid @ModelAttribute("elemento") Caracteristicas caracteristicas, BindingResult bindingResult){
         try{
+            if ( bindingResult.hasErrors() ) {
+                var mv = new ModelAndView("caracteristicas/novo");
+                mv.addObject("elemento", caracteristicas);
+                return mv;
+            }
+
             service.salvar(caracteristicas);
             return new ModelAndView("redirect:/caracteristicas");
         }catch (Exception e){

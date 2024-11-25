@@ -2,6 +2,7 @@ package br.edu.univille.poo.pneuxpress.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import br.edu.univille.poo.pneuxpress.entity.Produto;
 import br.edu.univille.poo.pneuxpress.service.CaracteristicasService;
 import br.edu.univille.poo.pneuxpress.service.MarcaService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/produto")
@@ -48,8 +50,16 @@ public class ProdutoController {
 
     @PostMapping
     @RequestMapping("/salvar")
-    public ModelAndView salvarNovo(@ModelAttribute("elemento") Produto produto){
+    public ModelAndView salvarNovo(@Valid @ModelAttribute("elemento") Produto produto, BindingResult bindingResult){
         try{
+            if ( bindingResult.hasErrors() ) {
+                var mv = new ModelAndView("produto/novo");
+                mv.addObject("elemento", produto);
+                mv.addObject("listaMarca", marcaService.obterTodos());
+                mv.addObject("listaCaracteristicas", caracteristicasService.obterTodos());
+                return mv;
+            }
+
             // produto.getCaracteristicas()
             service.salvar(produto);
             return new ModelAndView("redirect:/produto");

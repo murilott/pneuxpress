@@ -41,8 +41,8 @@ public class PedidoService {
         return repository.findAll(Sort.by("custoTotal"));
     }
 
-    public void salvar(Pedido pedido) {
-        repository.save(pedido);
+    public Pedido salvar(Pedido pedido) {
+        return repository.save(pedido);
     }
 
     public void excluir(Pedido pedido) {

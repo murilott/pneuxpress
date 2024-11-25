@@ -1,7 +1,11 @@
 package br.edu.univille.poo.pneuxpress.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +18,7 @@ import br.edu.univille.poo.pneuxpress.entity.Pedido;
 import br.edu.univille.poo.pneuxpress.service.ItemPedidoService;
 import br.edu.univille.poo.pneuxpress.service.PedidoService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/itemPedido")
@@ -31,11 +36,20 @@ public class ItemPedidoController {
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("itemPedido/index");
-        mv.addObject("item", new ItemPedido());
-        mv.addObject("pedido", new Pedido());
+        
+        ItemPedido novoItem = new ItemPedido();
+        // Pedido novoPedido = pedidoService.salvar(new Pedido());
+        // novoItem.setPedido(novoPedido);
+        // novoItem = service.salvar(novoItem);
+
+        // mv.addObject("novoPedido", new Pedido());
+        // mv.addObject("novoItem", new ItemPedido());
+        
         mv.addObject("listaProduto", produtoService.obterTodos());
         mv.addObject("listaPedido", pedidoService.obterTodos());
         mv.addObject("lista", service.obterTodos());
+        mv.addObject("novoItem", novoItem);
+
         return mv;
     }
 
@@ -49,30 +63,123 @@ public class ItemPedidoController {
         return mv;
     }
 
-    // https://github.com/murilott/sisacademia/blob/main/src/main/java/br/univille/sisacademia/controller/RotinaController.java
-    // god https://medium.com/@AlexanderObregon/data-mapping-with-springs-modelattribute-annotation-b41704c2521a
-
-    @RequestMapping("/salvar")
-    public ModelAndView incluirItemPedido(@ModelAttribute("item") ItemPedido item, Pedido pedido) {
+    @PostMapping
+    @RequestMapping("/incrementar")
+    public ModelAndView incluirItemPedido(@Valid ItemPedido item, BindingResult bindingResult) { //, ItemPedido item
         try{
             var mv = new ModelAndView("itemPedido/index");
-            // ItemPedido item = itemPedido;
+            
+            if ( bindingResult.hasErrors() ) {
+                mv = new ModelAndView("itemPedido/index");
+                Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
+
+                mv.addObject("listaProduto", produtoService.obterTodos());
+                mv.addObject("listaPedido", pedidoService.obterTodos());
+                mv.addObject("lista", service.obterTodos());
+                mv.addObject("novoItem", item);
+                mv.addObject("pedido", pedido);
+
+                return mv;
+            }
+
             item.setCusto(item.calculaCusto());
-            // Pedido ped = pedido;
-            // pedido = pedidoService.obterPedidoPeloItem(item);
-            // if (pedido.getId() == 0 ) {
-            //     pedido.setCustoTotal(1);
-            // }
+            
+            if (item.getPedido() == null || item.getPedido().getId() == 0) {
+                Pedido novoPedido = new Pedido();
+                novoPedido = pedidoService.salvar(novoPedido); 
+                
+                item.setPedido(novoPedido); 
+                // mv.addObject("print", "Entrou no if");
+            } 
+            // mv.addObject("print", "Passou fora if");
+
+            Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
             pedido.getItens().add(item);
-            // pedidoService.salvar(pedido);
+            // pedido.setCustoTotal(pedido.calculaCustoTotal());
 
-            service.salvar(item);
+            
+            // mv.addObject("print", pedido.getItens());
+            
+            // item.setPedido(null);
+            
+            ItemPedido novoItem = new ItemPedido();
+            novoItem.setPedido(pedido);
+            
+            
+            item = service.salvar(item);
+            
+            pedido.setCustoTotal(pedido.calculaCustoTotal());
 
+            mv.addObject("print", novoItem.getPedido().getItens());
+            
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
-            // mv.addObject("elemento", new ItemPedido());
-            // mv.addObject("pedido", pedido);
+            // mv.addObject("novoItem", new ItemPedido());
+
+            mv.addObject("novoItem", novoItem);
+            mv.addObject("pedido", novoItem.getPedido());
+            // mv.addObject("novoPedido", new Pedido());
+
+            return mv;
+        } catch (Exception e){
+            var mv = new ModelAndView("itemPedido/index");
+            // mv.addObject("novoItem", item);
+            // mv.addObject("novoPedido", new Pedido());
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            mv.addObject("novoItem", new ItemPedido());
+            mv.addObject("print", item.getPedido());
+            mv.addObject("erro", e.getMessage());
+            // mv.addObject("erro", e.getMessage());
+
+            return mv;
+        }
+    }
+   
+
+    // https://github.com/murilott/sisacademia/blob/main/src/main/java/br/univille/sisacademia/controller/RotinaController.java
+    // god https://medium.com/@AlexanderObregon/data-mapping-with-springs-modelattribute-annotation-b41704c2521a
+
+    
+    @RequestMapping("/salvarAntigo")
+    public ModelAndView incluirItemPedidoAntigo(@ModelAttribute("item") ItemPedido item) { //, Pedido pedido
+        try{
+            var mv = new ModelAndView("itemPedido/index");
+            item.setCusto(item.calculaCusto());
+
+            service.salvar(item);
+
+            ItemPedido novoItem = new ItemPedido();
+
+            var opt = pedidoService.obterPeloId(item.getPedido().getId());
+
+            if (opt.isPresent()) {
+                Pedido pedido = opt.get();
+                pedido.getItens().add(item);
+                pedidoService.salvar(pedido);
+
+                item.setPedido(pedido);
+                novoItem.setPedido(pedido);
+                mv.addObject("pedido", pedido);
+            } else {
+                Pedido pedido = new Pedido();
+                pedido.getItens().add(item);
+                pedidoService.salvar(pedido);
+
+                item.setPedido(pedido);
+                novoItem.setPedido(pedido);
+                mv.addObject("pedido", pedido);
+            }
+
+            service.salvar(item);
+            
+            
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("listaPedido", pedidoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            mv.addObject("item", novoItem);
+            
             return mv;
         } catch (Exception e){
             var mv = new ModelAndView("itemPedido/index");
@@ -93,7 +200,6 @@ public class ItemPedidoController {
             ItemPedido item = itemPedido;
             item.setCusto(item.calculaCusto());
 
-            // nss q perda de tempo - inútil
             Pedido pedido = pedidoService.obterPedidoPeloItem(item);
 
             pedido.getItens().add(item);
@@ -109,6 +215,24 @@ public class ItemPedidoController {
             mv.addObject("erro", e.getMessage());
             return mv;
         }
+    }
+
+    @GetMapping
+    @RequestMapping("selecionar/{id}")
+    public ModelAndView selecionar(@PathVariable long id, ItemPedido item){
+        var mv = new ModelAndView("itemPedido/index");
+        var opt = pedidoService.obterPeloId(id);
+        
+        if(opt.isPresent()) {
+            mv.addObject("listaProduto", produtoService.obterTodos());
+            mv.addObject("listaPedido", pedidoService.obterTodos());
+            mv.addObject("lista", service.obterTodos());
+            mv.addObject("novoItem", new ItemPedido());
+            mv.addObject("pedido", opt.get());
+            return mv;
+        }
+
+        return new ModelAndView("redirect:/itemPedido");
     }
 
     @GetMapping
