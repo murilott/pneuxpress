@@ -35,15 +35,22 @@
                         th:text="${caracteristicas.nome()}">
                     </option>
                 </select>
-                <!-- <input type="text" name="dim" id="dim" placeholder="Dimensões: " th:field="*{caracteristicas}"> -->
+
                 <label for="preco">Preco</label>
                 <input type="number" name="preco" id="preco" placeholder="Preço: " th:field="*{preco}">
+                <p th:if="${#fields.hasErrors('preco')}" th:errors="*{preco}">Erro de preço</p>
+
                 <label for="nome">Nome</label>
                 <input type="text" name="nome" id="nome" placeholder="Nome: " th:field="*{nomeDisplay}">
+                <p th:if="${#fields.hasErrors('nomeDisplay')}" th:errors="*{nomeDisplay}">Erro de nome</p>
+
                 <label for="quantidade">Quantidade</label>
                 <input type="number" name="quantidade" id="quantidade" placeholder="Quantidade: " th:field="*{quantidadeEstoque}">
+                <p th:if="${#fields.hasErrors('quantidadeEstoque')}" th:errors="*{quantidadeEstoque}">Erro de quantidade</p>
+
                 <label for="imagem">Imagem</label>
                 <input type="text" name="imagem" id="imagem" placeholder="Imagem: " th:field="*{imagem}">
+
                 <button id="btnSalvar" type="submit">Salvar</button>
             </form>
 
