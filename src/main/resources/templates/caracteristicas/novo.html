@@ -12,13 +12,14 @@
     <nav th:replace="layout :: header"></nav>
 
     <div id="corpo">
-        <div id="outer">
-            <h2>Cadastrar Características</h2>
-            <p><a th:href="@{/caracteristicas}">Caracteristicas</a> / Novo</p>
-            <button>Voltar</button>
-        </div>
+
 
         <div id="inner">
+            <div id="outer">
+                <h2>Cadastrar Características</h2>
+                <p><a th:href="@{/caracteristicas}">Caracteristicas</a> / Novo</p>
+                <button>Voltar</button>
+            </div>
             <form id="cadastraPneu" th:action="@{/caracteristicas/salvar}" th:object="${elemento}" method="post">
                 <input type="text" name="cat" id="cat" placeholder="Categoria: " th:field="*{categoria}">
                 <input type="text" name="lar" id="lar" placeholder="Largura: " th:field="*{largura}">

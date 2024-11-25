@@ -8,6 +8,8 @@
 <body>
     <nav th:replace="layout :: header"></nav>
 
+    <div id="meio">
+        <div id="inner">
     <h1>Caracteristicas</h1>
     <p><a th:href="@{/caracteristicas/novo}">Novo</a></p>
     <br>
@@ -30,5 +32,8 @@
     </table>
     <p th:unless="${lista.size()} > 0">Não há caracteristicas cadastradas.</p>
     <br>
+
+</div>
+</div>
 </body>
 </html>
