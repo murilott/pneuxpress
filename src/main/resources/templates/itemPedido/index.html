@@ -18,13 +18,11 @@
 
           <form id="myform" th:action="@{/itemPedido/incrementar}" th:object="${novoItem}" method="post">
             
-            <label for="Producto"><strong>Id Pedido ItemPedido:</strong></label>
-            <td><input readonly type="text" th:field="*{pedido.id}"></td>
+            <td><input readonly type="hidden" th:field="*{pedido.id}"></td>
 
-            <br>
 
-            <label for="Producto"><strong>Id ItemPedido:</strong></label>
-            <td><input readonly type="text" th:field="*{id}"></td>
+
+            <td><input readonly type="hidden" th:field="*{id}"></td>
             
             <label for="Product"><strong>Produto:</strong></label>
 
@@ -50,6 +48,24 @@
             <br>
             <button type="submit" id="btnSalvar">Adicionar</button>
             <br>
+            <div class="paga">
+              <!-- <label for="taxed"><strong>Imposto:</strong></label>
+              <input type="text" id="taxed" name="taxed" disabled/><br /> -->
+              <label for="totaled"><strong>Total:</strong></label>
+              <!-- th:text em u input ele fica ao lado se quiser que fique dentro TEM Q SER O VALUE POIS É O VALOR DE DENTRO DO INPUT -->
+              <input type="text" id="totaled" name="totaled" disabled th:value="${pedido?.custoTotal}"/>
+            
+              <div class="botao">
+                <!-- <button type="button" id="cancel">Cancelar</button> -->
+                <a th:href="@{/pedido/cancelar/{id}(id=${pedido?.id})}" id="cancel">Cancelar</a>
+                <a th:href="@{/pedido/salvar/{id}(id=${pedido?.id})}" id="final">Finalizar</a>
+                <!-- <a th:href="@{'/pedido/salvar/' + ${pedido?.id}}">Finalizar</a> -->
+                <!-- <button type="submit" id="finish">Finalizar</button> -->
+                <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
+                <p th:if="${erro != null}" th:text="${erro}"></p>
+                <!-- <p th:if="${print != null}" th:text="${print}"></p>  -->
+              </div>
+            </div>
 
             <div class="tabela">
               <h3><strong>Pedido:</strong></h3>
@@ -99,40 +115,24 @@
 
         <div id="Categories" class="flex-container2">
           <div class="flex-container3">
-            <div class="paga">
-              <label for="taxed"><strong>Imposto:</strong></label>
-              <input type="text" id="taxed" name="taxed" disabled/><br />
-              <label for="totaled"><strong>Total:</strong></label>
-              <input type="text" id="totaled" name="totaled" disabled th:text="${pedido?.custoTotal}"/>
-            
-              <div class="botao">
-                <!-- <button type="button" id="cancel">Cancelar</button> -->
-                <a th:href="@{/pedido/cancelar/{id}(id=${pedido?.id})}">Cancelar</a>
-                <a th:href="@{/pedido/salvar/{id}(id=${pedido?.id})}">Finalizar</a>
-                <!-- <a th:href="@{'/pedido/salvar/' + ${pedido?.id}}">Finalizar</a> -->
-                <!-- <button type="submit" id="finish">Finalizar</button> -->
-                <!-- <p th:if="${erro != null}" th:text="${erro}"></p> -->
-                <p th:if="${erro != null}" th:text="${erro}"></p>
-                <!-- <p th:if="${print != null}" th:text="${print}"></p>  -->
-              </div>
-            </div>
+
 
             <br>
 
-            <label for="Product"><strong>Lista pedido:</strong></label>
+            <!-- <label for="Product"><strong>Lista pedido:</strong></label> -->
 
-            <table>
+            <!-- <table>
               <tr th:each="e : ${listaPedido}">
                 <td  th:text="${e.id}">ID</td>
                 <td  th:text="${e.itens}">Itens</td>
                 <td  th:text="${e.custoTotal}">custoTotal</td>
                 <td><a th:href="@{/itemPedido/selecionar/{id}(id=${e.id})}">Visualizar</a></td>
               </tr>
-            </table>
+            </table> -->
 
             <!-- <br>
 
-            <label for="Product"><strong>Lista itenPedido:</strong></label> --> -->
+            <label for="Product"><strong>Lista itenPedido:</strong></label> --> 
 
             <!-- <table>
               <tr th:each="e : ${lista}">

@@ -11,14 +11,14 @@
 <body>
     <nav th:replace="layout :: header"></nav>
 
+    
     <div id="corpo">
-        <div id="outer">
-            <h2>Editar Produto</h2>
-            <p><a th:href="@{/produto}">Produtos</a> / Editar</p>
-            <button>Voltar</button>
-        </div>
-
-        <div id="inner">
+    <div id="inner">
+                <div id="outer">
+                    <h2>Editar Produto</h2>
+                    <p><a th:href="@{/produto}">Produtos</a> / Editar</p>
+                    <button>Voltar</button>
+                </div>
             <form id="cadastraPneu" th:action="@{/produto/salvar}" th:object="${elemento}" method="post">
                 <span>ID</span>
                 <input readonly type="text" th:field="*{id}">
