@@ -9,15 +9,17 @@
 <body>
     <nav th:replace="layout :: header"></nav>
 
-    <div id="meio" th:action="@{/usuario/login}" th:object="${usuario}" method="post">
-        <div id="login">
-            <h2>Login: </h2>
-            <form action="">
-                <input type="text" id="usuario" placeholder="Usuário: ">
-                <input type="text" id="senha" placeholder="Senha: ">
-                <button id="submit"> Entrar</button>
+    <div id="corpo">
 
-            </form>
+        <div id="inner" >
+            <div id="login">
+                <h2>Login: </h2>
+                <form th:action="@{/sessao/login}" th:object="${usuario}" method="post">
+                    <input type="text" id="usuario" placeholder="E-mail: " th:field="*{email}">
+                    <input type="text" id="senha" placeholder="Senha: "th:field="*{senha}">
+                    <button id="submit"> Entrar</button>
+                </form>
+            </div>
         </div>
     </div>
 </body>

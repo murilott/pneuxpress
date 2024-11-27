@@ -19,13 +19,12 @@
           <form id="myform" th:action="@{/itemPedido/incrementar}" th:object="${novoItem}" method="post">
             
             <td><input readonly type="hidden" th:field="*{pedido.id}"></td>
-
-
-
+            
             <td><input readonly type="hidden" th:field="*{id}"></td>
             
             <label for="Product"><strong>Produto:</strong></label>
-
+            <!-- <label for="Product"><strong>Quantidaede no estoque:</strong></label> -->
+            
             <select id="Product" name="Product" th:field="*{produto}">
                 <option th:each="produto : ${listaProduto}"
                         th:value="${produto.id}"
@@ -34,20 +33,23 @@
             </select>
 
             <div id="gapp">
+              <label for="Product"><strong>Quantidade:</strong></label>
               <input type="text" id="amount" name="amount" placeholder="Amount" th:field="*{quantidade}"/>
               <p th:if="${#fields.hasErrors('quantidade')}" th:errors="*{quantidade}"></p>
-              <input type="text" id="total" name="total" readonly placeholder="Total:"/>
+              <p th:if="${erroQuantidade != null}" th:text="${erroQuantidade}"></p>
+              <!-- <input type="text" id="total" name="total" readonly placeholder="Total:"/> -->
 
               <div id="flex">
-                <input type="text" id="unitprice" name="unitprice" readonly placeholder="Unit Price" th:text="*{produto?.preco}"/> 
-                <input type="text" id="tax" name="tax" placeholder="Tax" disabled/>
-                <input type="text" id="totalTax" name="totalTax" placeholder="Total Tax" disabled/>
+                <input type="text" id="unitprice" name="unitprice" readonly placeholder="Preço da unidade" th:value="${produto?.preco}"/> 
+                <!-- <input type="text" id="tax" name="tax" placeholder="Tax" disabled/>
+                <input type="text" id="totalTax" name="totalTax" placeholder="Total Tax" disabled/> -->
               </div>
             </div>
-
+            
             <br>
             <button type="submit" id="btnSalvar">Adicionar</button>
             <br>
+            <h3><strong>Pedido:</strong></h3>
             <div class="paga">
               <!-- <label for="taxed"><strong>Imposto:</strong></label>
               <input type="text" id="taxed" name="taxed" disabled/><br /> -->
@@ -68,16 +70,18 @@
             </div>
 
             <div class="tabela">
-              <h3><strong>Pedido:</strong></h3>
+              <h3><strong>Itens:</strong></h3>
+              <!-- <input readonly type="text" th:value="${pedido.itens.id}"> -->
+              
               <!-- <p th:text="'pedido id: ' + ${pedido.id}"></p> -->
               <!-- <p th:text="'custo: ' + ${pedido.calculaCustoTotal()}"></p> -->
   
               <!-- <table id="tabela2" th:if="${pedido.itens.size()} > 0"> -->
               <table id="tabela2" > <!-- th:if="${pedido.itens}"-->
                 <tr>
-                  <th id="id ped"><strong>Id pedido</strong></th>
-                  <th id="id"><strong>Id itemPedido</strong></th>
-                  <th id="id proda"><strong>Id prod</strong></th>
+                  <th id="id Pedido"><strong>Id pedido</strong></th>
+                  <th id="id"><strong>Id Item</strong></th>
+                  <!-- <th id="id proda"><strong>Id prod</strong></th> -->
                   <th id="prod1"><strong>Produto</strong></th>
                   <th id="UnitPrice"><strong>Preço Unidade</strong></th>
                   <th id="Amount"><strong>Quantidade</strong></th>
@@ -88,7 +92,7 @@
                 <tr th:each="e : ${pedido?.itens}">
                   <td  th:text="${pedido.id}"></td>
                   <td  th:text="${e.id}"></td>
-                  <td  th:text="${e.produto.id}"></td>
+                  <!-- <td  th:text="${e.produto.id}"></td> -->
                   <td  th:text="${e.produto.nomeDisplay}"></td>
                   <td  th:text="${e.produto.preco}"></td>
                   <td  th:text="${e.quantidade}"></td>
@@ -107,8 +111,8 @@
                 </tr> -->
               </table>
   
-              <p th:unless="${lista.size()} > 0">Não há item cadastrado.</p>
-              <p th:if="${pedido == null}">Não há pedido</p>
+              <!-- <p th:unless="${lista.size()} > 0">Não há item cadastrado.</p>
+              <p th:if="${pedido == null}">Não há pedido</p> -->
             </div>
           </form>
         </div>
@@ -119,9 +123,9 @@
 
             <br>
 
-            <!-- <label for="Product"><strong>Lista pedido:</strong></label> -->
+            <!-- <label for="Product"><strong>Lista pedido:</strong></label>
 
-            <!-- <table>
+            <table>
               <tr th:each="e : ${listaPedido}">
                 <td  th:text="${e.id}">ID</td>
                 <td  th:text="${e.itens}">Itens</td>
