@@ -36,4 +36,13 @@ public class Usuario {
     @JoinColumn(name = "usuario_id")
     private List<Pedido> pedidos;
 
+
+    // public String obterItens() {
+    //     String itens = "";
+    //     for (Pedido pedido : getPedidos()) {
+    //         itens = itens + pedido.getItens();
+    //     }
+
+    //     return itens;
+    // }
 }

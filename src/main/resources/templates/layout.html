@@ -11,18 +11,20 @@
 <body>
     <nav th:fragment="header">
         <div id="header">
-            <h2><strong>PneuXpress</strong></h2>
+            <h2><a th:href="@{/estoque}"<strong>PneuXpress</strong></a></h2>
 
             <ul id="options">
             <li><a th:href="@{/estoque}">Estoque</a></li>
-            <span th:if="${sessao != null and sessao.usuarioAtual.admin == true}">
+            <span th:if="${sessao != null and sessao.usuarioAtual?.admin == true}">
                 <li><a th:href="@{/cadastros}">Cadastros</a></li>
             </span>
             <li><a th:href="@{/produto}">Produtos</a></li>    
             <li><a th:href="@{/itemPedido}">Novo Pedido</a></li>    
             </ul>
 
-            <p th:if="${sessao != null}" th:text="'Bem vindo, ' +${sessao.usuarioAtual.nomeCompleto}"></p>
+            <span th:if="${sessao.usuarioAtual != null}">
+                <a th:href="@{/usuario}"><p th:text="'Bem vindo, ' +${sessao.usuarioAtual?.nomeCompleto}"></p></a>
+            </span>
             <!-- <p th:if="${sessao != null}" th:text="'Bem vindo, ' + |?${T(src\main\java\br\edu\univille\poo\pneuxpress\entity\Sessao.java).usuarioAtual.nomeCompleto}|"></p> -->
 
             <ul id="login">

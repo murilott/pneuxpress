@@ -31,7 +31,7 @@
             <td  th:text="${e.senha}">Preço</td>
             <td  th:text="${e.admin}">Quantidade</td>
             <td  th:text="${e.pedidos}">Quantidade</td>
-            <td><a th:href="@{/produto/{id}(id=${e.id})}">Editar</a></td>
+            <td><a th:href="@{/usuario/{id}(id=${e.id})}">Editar</a></td>
         </tr>
     </table>
     <p th:unless="${lista.size()} > 0">Não há usuários cadastrados.</p>
