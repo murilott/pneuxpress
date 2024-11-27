@@ -68,6 +68,20 @@ public class ItemPedidoController {
     public ModelAndView incluirItemPedido(@Valid ItemPedido item, BindingResult bindingResult) { //, ItemPedido item
         try{
             var mv = new ModelAndView("itemPedido/index");
+
+            if ( item.getQuantidade() > item.getProduto().getQuantidadeEstoque() ) {
+                mv = new ModelAndView("itemPedido/index");
+                Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
+
+                mv.addObject("listaProduto", produtoService.obterTodos());
+                mv.addObject("listaPedido", pedidoService.obterTodos());
+                mv.addObject("lista", service.obterTodos());
+                mv.addObject("novoItem", item);
+                mv.addObject("pedido", pedido);
+                mv.addObject("erroQuantidade", "Quantidade selecionada maior que a quantidade estoque.");
+
+                return mv;
+            }
             
             if ( bindingResult.hasErrors() ) {
                 mv = new ModelAndView("itemPedido/index");
@@ -94,6 +108,7 @@ public class ItemPedidoController {
             // mv.addObject("print", "Passou fora if");
 
             Pedido pedido = pedidoService.obterPeloId(item.getPedido().getId()).get();
+            // Pedido pedido = item.getPedido();
             pedido.getItens().add(item);
             // pedido.setCustoTotal(pedido.calculaCustoTotal());
 
@@ -110,7 +125,7 @@ public class ItemPedidoController {
             
             pedido.setCustoTotal(pedido.calculaCustoTotal());
 
-            mv.addObject("print", novoItem.getPedido().getItens());
+            // mv.addObject("print", novoItem.getPedido().getItens());
             
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("listaPedido", pedidoService.obterTodos());
@@ -129,7 +144,7 @@ public class ItemPedidoController {
             mv.addObject("listaProduto", produtoService.obterTodos());
             mv.addObject("lista", service.obterTodos());
             mv.addObject("novoItem", new ItemPedido());
-            mv.addObject("print", item.getPedido());
+            // mv.addObject("print", item.getPedido());
             mv.addObject("erro", e.getMessage());
             // mv.addObject("erro", e.getMessage());
 

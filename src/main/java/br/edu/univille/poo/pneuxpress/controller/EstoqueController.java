@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
+import br.edu.univille.poo.pneuxpress.service.SessaoService;
+import br.edu.univille.poo.pneuxpress.service.UsuarioService;
+import br.edu.univille.poo.pneuxpress.entity.Sessao;
 import br.edu.univille.poo.pneuxpress.service.MarcaService;
 
 @Controller
@@ -22,9 +25,14 @@ public class EstoqueController {
     @Autowired
     private MarcaService marcaService;
 
+    // @Autowired
+    // private SessaoService sessaoService;
+
     @GetMapping
     public ModelAndView index(){
         var mv = new ModelAndView("estoque/index");
+        // Sessao ses = sessaoService.obterSessaoInfo();
+        // mv.addObject("sessao", ses);
         mv.addObject("listaProduto", produtoService.obterTodos());
         return mv;
     }

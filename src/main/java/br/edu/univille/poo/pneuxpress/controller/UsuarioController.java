@@ -2,6 +2,7 @@ package br.edu.univille.poo.pneuxpress.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.univille.poo.pneuxpress.entity.Pedido;
 import br.edu.univille.poo.pneuxpress.entity.Usuario;
 import br.edu.univille.poo.pneuxpress.service.UsuarioService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/usuario")
@@ -23,6 +26,7 @@ public class UsuarioController {
     public ModelAndView index(){
         var mv = new ModelAndView("usuario/index");
         mv.addObject("lista", service.obterTodos());
+        
         return mv;
     }
 
@@ -31,6 +35,7 @@ public class UsuarioController {
     public ModelAndView login(){
         var mv = new ModelAndView("usuario/login");
         mv.addObject("lista", service.obterTodos());
+        mv.addObject("usuario", new Usuario());
         return mv;
     }
 
@@ -44,8 +49,15 @@ public class UsuarioController {
 
     @PostMapping
     @RequestMapping("/salvar")
-    public ModelAndView salvarNovo(@ModelAttribute("elemento") Usuario usuario){
+    public ModelAndView salvarNovo(@Valid @ModelAttribute("usuario") Usuario usuario, BindingResult bindingResult){
         try{
+            if ( bindingResult.hasErrors() ) {
+                var mv = new ModelAndView("usuario/novo");
+                mv.addObject("usuario", usuario);
+
+                return mv;
+            }
+
             service.salvar(usuario);
             return new ModelAndView("redirect:/usuario");
         }catch (Exception e){

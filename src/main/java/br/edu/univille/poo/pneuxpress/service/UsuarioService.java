@@ -23,12 +23,26 @@ public class UsuarioService {
         return repository.findById(id);
     }
 
+    public Usuario obterPeloEmail(String email){
+        List<Usuario> todos = obterTodos();
+
+        for (Usuario user : todos) {
+            if (user.getEmail().equals(email)) {
+                return user;
+            }
+        }
+
+        return new Usuario();
+    
+    }
+
     public List<Usuario> obterTodos(){
         return repository.findAll(Sort.by("nomeCompleto"));
     }
 
     public void salvar(Usuario usuario) {
         repository.save(usuario);
+        
     }
 
     public void excluir(Usuario usuario) {

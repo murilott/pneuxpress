@@ -9,9 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import br.edu.univille.poo.pneuxpress.entity.ItemPedido;
 import br.edu.univille.poo.pneuxpress.entity.Pedido;
+import br.edu.univille.poo.pneuxpress.entity.Produto;
+import br.edu.univille.poo.pneuxpress.entity.Sessao;
+import br.edu.univille.poo.pneuxpress.entity.Usuario;
 import br.edu.univille.poo.pneuxpress.service.PedidoService;
 import br.edu.univille.poo.pneuxpress.service.ProdutoService;
+import br.edu.univille.poo.pneuxpress.service.SessaoService;
+import br.edu.univille.poo.pneuxpress.service.UsuarioService;
 
 @Controller
 @RequestMapping("/pedido")
@@ -22,6 +28,12 @@ public class PedidoController {
 
     @Autowired
     private ProdutoService produtoService;
+
+    @Autowired
+    private SessaoService sessaoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     @GetMapping
     public ModelAndView index(){
@@ -46,13 +58,23 @@ public class PedidoController {
     public ModelAndView salvar(@PathVariable long id){
         try{
             var opt = service.obterPeloId(id);
+            Sessao ses = sessaoService.obterSessaoInfo();
+            Usuario usuario = ses.getUsuarioAtual();
 
             if(opt.isPresent()) {
                 Pedido pedido = opt.get();
                 pedido.setCustoTotal(pedido.calculaCustoTotal());
-                // Futuramente setar o usuário aqui
-                service.salvar(pedido);
+                pedido = service.salvar(pedido);
 
+                for (ItemPedido item : pedido.getItens()) {
+                    Produto prod = item.getProduto();
+                    prod.setQuantidadeEstoque(prod.getQuantidadeEstoque() - item.getQuantidade());
+                    // produtoService.salvar(prod);
+                }
+                
+
+                usuario.getPedidos().add(pedido);
+                usuarioService.salvar(usuario);
             }
 
             return new ModelAndView("redirect:/itemPedido");
