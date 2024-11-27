@@ -8,9 +8,10 @@
 <body>
     <nav th:replace="layout :: header"></nav>
     <div id="meio">
-<div id="inner">
+    <div id="inner">
     <h1>Usuários</h1>
     <p><a th:href="@{/usuario/novo}">Novo</a></p>
+    <!-- <p th:if="${sessao != null}" th:text="${sessao.usuarioAtual.nomeCompleto}"></p> -->
     <br>
     <table th:if="${lista.size()} > 0">
         <tr>

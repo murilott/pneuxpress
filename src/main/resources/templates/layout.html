@@ -15,13 +15,18 @@
 
             <ul id="options">
             <li><a th:href="@{/estoque}">Estoque</a></li>
-            <li><a th:href="@{/cadastros}">Cadastros</a></li>
+            <span th:if="${sessao != null and sessao.usuarioAtual.admin == true}">
+                <li><a th:href="@{/cadastros}">Cadastros</a></li>
+            </span>
             <li><a th:href="@{/produto}">Produtos</a></li>    
             <li><a th:href="@{/itemPedido}">Novo Pedido</a></li>    
             </ul>
 
+            <p th:if="${sessao != null}" th:text="'Bem vindo, ' +${sessao.usuarioAtual.nomeCompleto}"></p>
+            <!-- <p th:if="${sessao != null}" th:text="'Bem vindo, ' + |?${T(src\main\java\br\edu\univille\poo\pneuxpress\entity\Sessao.java).usuarioAtual.nomeCompleto}|"></p> -->
+
             <ul id="login">
-                <li><a th:href="@{/usuario/editar}">Editar</a></li>
+                <!-- <li><a th:href="@{/usuario/editar}">Editar</a></li> -->
                 <li><a th:href="@{/usuario/novo}">Cadastrar</a></li>
                 <li><a th:href="@{/usuario/login}">Login</a></li>
             </ul>

@@ -17,14 +17,13 @@
             <div id="outer">
                 <h2>Cadastrar Usuário</h2>
                 <p><a th:href="@{/usuario}">Usuário</a> / Novo</p>
-                <button>Voltar</button>
             </div>
             <form id="cadastraPneu" th:action="@{/usuario/salvar}" th:object="${usuario}" method="post">
                 <label for="preco">Nome Completo</label>
                 <input type="text" name="nome" id="nome" placeholder="Nome Completo: " th:field="*{nomeCompleto}">
                 <p th:if="${#fields.hasErrors('nomeCompleto')}" th:errors="*{nomeCompleto}">Erro de nome</p>
 
-                <label for="nome">mail</label>
+                <label for="nome">E-mail</label>
                 <input type="text" name="email" id="email" placeholder="E-mail: " th:field="*{email}">
                 <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Erro de email</p>
 
