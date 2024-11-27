@@ -7,6 +7,8 @@
 </head>
 <body>
     <nav th:replace="layout :: header"></nav>
+    <div id="meio">
+    <div id="inner">
 
     <h1>Editar Marca</h1>
     <p><a th:href="@{/marca}">Marcas</a> / Editar</p>
@@ -29,5 +31,7 @@
     </form>
     <p th:if="${erro != null}" th:text="${erro}"></p>
     <br>
+</div>
+</div>
 </body>
 </html>

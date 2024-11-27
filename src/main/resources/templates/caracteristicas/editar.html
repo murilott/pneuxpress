@@ -7,15 +7,19 @@
 </head>
 <body>
     <nav th:replace="layout :: header"></nav>
-
+    <div id="meio">
+    <div id="inner">
     <h1>Editar Caracteristicas</h1>
     <p><a th:href="@{/caracteristicas}">Caracteristicas</a> / Editar</p>
     <br>
     <form th:action="@{/caracteristicas/salvar}" th:object="${elemento}" method="post">
     <table>
         <tr>
-            <td>ID</td>
+            <td>ID:</td>
             <td><input readonly type="text" th:field="*{id}"></td>
+        </tr>
+        <tr>
+            <br>
             <td>Categoria</td>
             <td>Largura</td>
             <td>Perfil</td>
@@ -28,12 +32,14 @@
             <td><input type="text" th:field="*{aro}"></td>
         </tr>
         <tr>
-            <td><a th:href="@{/caracteristicas/{id}/excluir(id=${id})}">Excluir</a></td>
+            <td id="btnExlui"><a th:href="@{/caracteristicas/{id}/excluir(id=${id})}">Excluir</a></td>
             <td><button type="submit">Salvar</button></td>
         </tr>
     </table>
     </form>
     <p th:if="${erro != null}" th:text="${erro}"></p>
     <br>
+</div>
+</div>
 </body>
 </html>

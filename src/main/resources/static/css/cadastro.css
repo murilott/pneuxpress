@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 *{
     margin: 0;
     padding: 0;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    color: black;
 }
 
 body{
@@ -29,7 +35,11 @@ ul{
     display: flex;
     flex-direction: row;
 }
-
+ol, ul, li {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
 li{
     margin: 10px;
 }
@@ -43,20 +53,55 @@ li{
 }
 
 #inner{
+    padding: 30px;
     display: flex;
     margin: 3%;
     flex-direction: column;
     justify-content: start;
     align-items: center;
     background-color: #e0dcdc;
-    height: 350px;
+    min-height: 350px;
+    height: fit-content;
     width: 50%;
 }
+
 
 input{
     margin-bottom: 5px;
     margin-top: 5px;
 }
+
+#ladolado {
+    display: flex; 
+    flex-wrap: wrap; 
+    gap: 20px; 
+    justify-content: center; 
+    align-items: center; 
+    text-align: center; 
+}
+
+.produto {
+    width: 250px; 
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+img {
+    width: 100%; 
+    height: auto; 
+    max-width: 150px;
+    max-height: 150px;
+    border-bottom: 1px solid #ddd; 
+    margin-bottom: 10px; 
+}
+
+h2 {
+    text-align: center; 
+}
+
 
 #corpo{
     display: flex;
@@ -66,7 +111,6 @@ input{
 }
 
 #cadastraPneu{
-    /* margin: 0 auto; */
     padding: 20px;
     margin: 10px;
     width: 300px;
@@ -88,12 +132,36 @@ a.hover{
     color: #f3f3f3;
 }
 
-li{
-    text-decoration: none;
+a:hover{
+    color: rgb(84, 81, 255);
+}
+
+#btnExclui{
+    color: red;
+}
+
+#btnExclui.hover{
+    background-color: red;
 }
 
 td {
     width: fit-content;
     height: fit-content;
     width: 90px;
+}
+
+#cancel{
+    font-size: larger;
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+#cancel:hover{
+    color: red;
+}
+
+#final{
+    font-size: larger;
+}
+#final:hover{
+    color: rgb(10, 216, 10);
 }

@@ -10,20 +10,28 @@
 <body>
     <nav th:replace="layout :: header"></nav>
 
-
     <div id="corpo">
         <div id="outer">
         </div>
 
         <div id="inner">
             <h2>Produtos</h2>
-            <div class="produto" th:each="prod : ${listaProduto}">
-                <img th:src="${prod.imagem}" alt="" srcset="">
-                <p th:text="${prod.nomeDisplay}"></p>
-                <span th:text="${prod.marca.nome}"></span>
-                <span th:text="${prod.quantidadeEstoque} + ' unidade(s)'"></span>
+            <div id="ladolado">
+            <div th:each="prod : ${listaProduto}" class="produto">
+                
+                <img th:src="${prod.imagem}" alt="Imagem do produto" />
+                
+                
+                <p th:text="${prod.nomeDisplay}">Nome do produto</p>
+                
+                
+                <span th:text="${prod.marca.nome}">Marca</span>
+                
+                
+                <span th:text="${prod.quantidadeEstoque} + ' unidade(s)'">Quantidade</span>
             </div>
         </div>
+    </div>
     </div>
 </body>
 </html>
